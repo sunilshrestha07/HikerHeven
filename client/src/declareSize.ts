@@ -1,0 +1,1 @@
+export const paddingSize = ' px-8 py-2 sm:px-16 sm:py-2 xl:px-32 xl:py-3 '

@@ -5,7 +5,18 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'Manrope': ['Manrope'],
+        'Lora': ['Lora'],
+        'Mulish': ['Mulish'],
+        'Quicksand': ['Quicksand'],
+      },
+      colors: {
+        'darkGreen': '#0C4E47',
+        'lightGreen':'#51D16D'
+      }
+    },
   },
   plugins: [],
 }
