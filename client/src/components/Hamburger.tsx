@@ -19,7 +19,7 @@ export default function Hamburger() {
                 <img className=" h-7" src="./navImages/menu.png" alt="" onClick={handelToggle} />
             </div>
             <div className={isMenuActive ? "": "hidden"}>
-                <div className=" absolute top-14 right-0 flex flex-col h-screen  w-screen items-center font-Quicksand text-2xl font-semibold gap-16 pt-16 transition ease-in-out duration-500" onClick={handelToggle}>
+                <div className=" absolute top-14 right-0 flex flex-col h-screen  w-screen items-center font-Quicksand text-2xl font-semibold gap-16 pt-16 transition ease-in-out duration-500 bg-white z-50" onClick={handelToggle}>
                     {menu.map((item, index) => (
                         <Link key={index} to={item.link} className="hover:text-lightGreen">{item.name}</Link >
                     ))}

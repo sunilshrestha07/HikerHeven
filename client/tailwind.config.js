@@ -18,5 +18,17 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.text-stroke': {
+          '-webkit-text-stroke': '1px black',
+        },
+        '.fill-transparent': {
+          'fill': 'transparent',
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    }
+  ],
 }
