@@ -1,5 +1,6 @@
 import Crousel from "../components/Crousel"
 import Favorites from "../components/Favorites"
+import FindMore from "../components/FindMore"
 import Trails from "../components/Trails"
 import { paddingSize } from "../declareSize"
 
@@ -7,7 +8,7 @@ export default function Home() {
   return (
     <div>
       <div className="">
-        <div className="flex flex-col gap-16 sm:gap-6">
+        <div className="flex flex-col gap-10">
           <div className={paddingSize}>
             <Crousel/>
           </div>
@@ -16,6 +17,9 @@ export default function Home() {
           </div>
           <div className="">
             <Trails/>
+          </div>
+          <div className={paddingSize}>
+            <FindMore/>
           </div>
         </div>
       </div>
