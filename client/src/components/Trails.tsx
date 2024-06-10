@@ -6,7 +6,7 @@ export default function Trails() {
     <>
         <div className=" bg-gray-100">
             <div className={paddingSize}>
-              <div className=" grid grid-rows-2 sm:grid-cols-2 gap-0 sm:gap-14 py-5 sm:py-16">
+              <div className=" grid grid-rows-2 sm:grid-rows-none sm:grid-cols-2 gap-0 sm:gap-14 py-5 sm:py-16">
                   <div className=" order-2 sm:order-1 row-span-1 sm:col-span-1 grid grid-cols-2 gap-5 sm:gap-8">
                       <div className="relative">
                         <img className="w-full aspect-video object-cover object-center rounded-2xl " src="/crouselImage/easy.jpg" alt="" />
