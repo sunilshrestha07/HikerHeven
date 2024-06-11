@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { paddingSize } from "../declareSize";
 import React, { useState } from "react";
 import { registerFormDataInterface } from "../declareInterface";
@@ -47,7 +46,7 @@ export default function Register() {
                                  placeholder="Email" 
                                  onChange={handelRegister}/>
 
-                                  <button type="submit" className=" bg-darkGreen font-Lora text-base xl:text-xl px-5 py-2 xl:py-3 rounded-full text-white hover:text-black  mt-4">Register today</button>
+                                  <button type="submit" className=" bg-darkGreen font-Lora text-base xl:text-xl px-5 py-2 xl:py-3 rounded-full text-white hover:text-black hover:bg-lightGreen mt-4">Register today</button>
                               </form>
                             </div>
                         </div> 
@@ -56,7 +55,6 @@ export default function Register() {
                 <div className=" col-span-2 order-1 sm:order-2 ">
                     <img className=" h-full aspect-video sm:w-full sm:aspect-[6/7] object-cover object-center" src="/crouselImage/announcement.jpg" alt="" />
                 </div>
-
             </div>
         </div>  
     </>

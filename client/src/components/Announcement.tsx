@@ -19,7 +19,7 @@ export default function Announcement() {
                         <div className=" flex flex-col justify-center items-start gap-5 xl:gap-10 xl:w-3/4">
                             <p className=" font-Quicksand text-sm sm:text-sm xl:text-xl">Experience the breathtaking beauty of Kalinchwok on an exciting hike with HIkerHeven . Immerse yourself in nature's majesty as we trek through picturesque trails, surrounded by stunning mountain vistas and lush forests.</p>
                             <Link to='/register'>
-                                <button className=" bg-darkGreen font-Lora text-base xl:text-xl px-5 py-2 rounded-full text-white hover:text-black ">Register today</button>
+                                <button className=" bg-darkGreen font-Lora text-base xl:text-xl px-5 py-2 rounded-full text-white hover:text-black hover:bg-lightGreen ">Register today</button>
                             </Link>
                         </div>
                     </div>
