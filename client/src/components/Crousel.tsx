@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function Crousel() {
+  //not shoiwng the indicator of the crousel if the screen is smaller than 640 px
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 640); 
+        };
+
+        handleResize(); 
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
   const [serachedHike, setSerachedHike] = useState<String>();
   const handelSearch = (e:React.ChangeEvent<HTMLInputElement>) =>{
@@ -29,6 +40,7 @@ export default function Crousel() {
             infiniteLoop={true}
             autoPlay={true}
             interval={3000}
+            showIndicators={!isSmallScreen}
           >
             {crouselImages.map((item, index) => (
               <div className="h-full w-full overflow-hidden bg-no-repeat " key={index}>

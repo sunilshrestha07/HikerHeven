@@ -1,3 +1,4 @@
+import Announcement from "../components/Announcement"
 import Crousel from "../components/Crousel"
 import Favorites from "../components/Favorites"
 import FindMore from "../components/FindMore"
@@ -20,6 +21,9 @@ export default function Home() {
           </div>
           <div className={paddingSize}>
             <FindMore/>
+          </div>
+          <div className={paddingSize}>
+            <Announcement/>
           </div>
         </div>
       </div>

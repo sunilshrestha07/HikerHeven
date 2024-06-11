@@ -6,6 +6,7 @@ import About from "./pages/About"
 import Saved from "./pages/Saved"
 import AboutHike from "./pages/AboutHike"
 import HikesPage from "./pages/HikesPage"
+import Register from "./pages/Register"
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
             <Route path ="/saved" element={<Saved/>}/>
             <Route path ="/aboutHike" element={<AboutHike/>}/>
             <Route path="/level/:level" element={<HikesPage/>}/>
+            <Route path="/register" element={<Register/>}/>
           </Routes>
       </BrowserRouter>
     </>
