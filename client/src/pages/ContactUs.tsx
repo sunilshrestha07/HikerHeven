@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { paddingSize } from "../declareSize";
+import { messageInterface } from "../declareInterface";
 
-interface messageState{
-  email?:string,
-  message?:string
-}
 export default function ContactUs() {
-  const [message,setMessage] = useState<messageState>({})
+  const [message,setMessage] = useState<messageInterface>({})
     const handelMessage = (e:React.ChangeEvent<HTMLInputElement>) =>{
     setMessage({...message,[e.target.id]:e.target.value})
   }
