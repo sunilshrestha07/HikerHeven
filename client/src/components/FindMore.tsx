@@ -14,7 +14,7 @@ export default function FindMore() {
                             alt="Nature trail" 
                         />
                     </div>
-                    <div className="row-span-1 sm:col-span-1 bg-darkGreen w-full h-full px-6 py-3 xl:px-16 lg:py-5 flex flex-col gap-4 sm:gap-6 justify-center items-start">
+                    <div className="row-span-1 sm:col-span-1 bg-darkGreen w-full h-full px-6 py-6 sm:py-3 xl:px-16 lg:py-5 flex flex-col gap-4 sm:gap-6 justify-center items-start">
                         <div className="font-Lora text-2xl sm:text-xl lg:text-3xl font-semibold text-white">
                             <p>Step into nature's embrace, one trail at a time</p>
                         </div>

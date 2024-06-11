@@ -7,6 +7,8 @@ import Saved from "./pages/Saved"
 import AboutHike from "./pages/AboutHike"
 import HikesPage from "./pages/HikesPage"
 import Register from "./pages/Register"
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
             <Route path ="/aboutHike" element={<AboutHike/>}/>
             <Route path="/level/:level" element={<HikesPage/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/signup" element={<Signup/>}/>
           </Routes>
       </BrowserRouter>
     </>

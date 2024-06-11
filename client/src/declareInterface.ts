@@ -7,3 +7,14 @@ export interface messageInterface{
   email?: string,
   message?: string
 }
+
+export interface loginFormDataInterface {
+  email?: string,
+  password?: string
+}
+
+export interface SingupFormDataInterface {
+  name?: string,
+  email?: string,
+  password?: string
+}
