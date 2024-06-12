@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const postSchema = new Schema({
     name:{
@@ -9,9 +9,9 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
-    photos:{
+    image:{
         type:String,
-        required: true
+        required:false
     },
     level:{
         type:String,
@@ -20,8 +20,8 @@ const postSchema = new Schema({
     map:{
         type:String,
         required: true
-    },
-    rating:{
-        type:Number,
-        required: true}
+    }
 },{timestamps: true});
+
+const Post = mongoose.model("Post", postSchema);
+export default Post
