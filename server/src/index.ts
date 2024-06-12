@@ -6,7 +6,8 @@ import mongoose from "mongoose";
 
 // Importing routers
 import postRouters from "../src/routes/post.routes";
-import userRouters from "../src/routes/user.routes"
+import userRouters from "../src/routes/user.routes";
+import reviewRouters from "../src/routes/review.routes"
 
 // Getting values from the config
 const port = config.port || 5000;
@@ -43,7 +44,8 @@ app.get('/', (req: Request, res: Response) => {
 
 // Routes
 app.use('/api', postRouters);
-app.use('/api', userRouters)
+app.use('/api', userRouters);
+app.use('/api', reviewRouters)
 
 
 // Error handling middleware (should be placed at the end)

@@ -20,6 +20,10 @@ const postSchema = new Schema({
     map:{
         type:String,
         required: true
+    },
+    userId:{
+        type:Number,
+        required:true
     }
 },{timestamps: true});
 
