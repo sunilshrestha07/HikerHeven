@@ -1,5 +1,7 @@
+import Map from "../components/Map"
 import Reviews from "../components/Reviews"
 import { paddingSize } from "../declareSize"
+import ScrollToTop from "../function/ScrollToTop"
 
 export default function AboutHike() {
   const aboutHike = {name:'ChampaDevi',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowOne.jpg',level:'hard',description:'One of the best places to hike around Kathmandu Valley. Your hike begins from North side of Kathmandu valley Sundarjal, and on the trail you will be able to witness sources of fresh water, beautiful villages and their culture, variation on vegetation, and the majestic Himalayan range. There are places to buy water and food throughout the trip especially in the 1st half of the trek.'}
@@ -7,6 +9,7 @@ export default function AboutHike() {
   return (
     <>
       <div className="">
+        <ScrollToTop/>
         <div className={`${paddingSize} mt-2 sm:mt-6`}>
           <div className=" rounded-lg overflow-hidden ">
               <div className=" relative w-full h-full">
@@ -47,7 +50,9 @@ export default function AboutHike() {
                   </div>
                   {/* map and recommendation part */}
                   <div className=" sm:col-span-2 bg-green-500">
-                    shrestha
+                    <div className="">
+                      <Map/>
+                    </div>
                   </div>
                 </div>
               </div>
