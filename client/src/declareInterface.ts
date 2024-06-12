@@ -22,3 +22,7 @@ export interface SingupFormDataInterface {
 export interface reviewInterface {
   review?: string,
 }
+
+export interface mapProps{
+  iframe?: string
+}
