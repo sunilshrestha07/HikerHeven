@@ -24,7 +24,7 @@ export default function HikesPage() {
             <p className="font-Lora text-xl sm:text-4xl font-semibold">Find your best hike</p>
           </div>
           <div className="">
-            <div className=" grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-8  ">
+            <div className=" grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-8  ">
                 {favorite
                 //showing only 4 hikes
                 .map((hike,index)=>(

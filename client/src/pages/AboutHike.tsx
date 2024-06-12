@@ -1,12 +1,13 @@
+import Reviews from "../components/Reviews"
 import { paddingSize } from "../declareSize"
 
 export default function AboutHike() {
-  const aboutHike = {name:'ChampaDevi',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowOne.jpg',level:'hard'}
+  const aboutHike = {name:'ChampaDevi',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowOne.jpg',level:'hard',description:'One of the best places to hike around Kathmandu Valley. Your hike begins from North side of Kathmandu valley Sundarjal, and on the trail you will be able to witness sources of fresh water, beautiful villages and their culture, variation on vegetation, and the majestic Himalayan range. There are places to buy water and food throughout the trip especially in the 1st half of the trek.'}
 
   return (
     <>
       <div className="">
-        <div className={`${paddingSize} mt-10`}>
+        <div className={`${paddingSize} mt-2 sm:mt-6`}>
           <div className=" rounded-lg overflow-hidden ">
               <div className=" relative w-full h-full">
                 <div className="">
@@ -27,7 +28,27 @@ export default function AboutHike() {
                         <img className=" h-3 sm:h-5" src="/navImages/ystar.png" alt="" />
                           <p className="text-base sm:text-2xl">{aboutHike.rating}</p>
                     </div>
-                    <p className="text-base sm:text-2xl">{aboutHike.location}</p>
+                        <p className="text-base sm:text-2xl">{aboutHike.location}</p>
+                </div>
+              </div>
+              {/* lower part  */}
+              <div className="">
+                <div className=" grid grid-rows-2 sm:grid-rows-none sm:grid-cols-6">
+                  {/* Description */}
+                  <div className=" sm:col-span-4 py-6 flex flex-col gap-14">
+                    <div className=" flex flex-col gap-1 sm:gap-2">
+                      <p className=" font-Lora font-semibold text-xl sm:text-2xl">Description</p>
+                      <p className=" font-Quicksand text-sm sm:text-base ">{aboutHike.description}</p>
+                    </div>
+                    {/* Reviews */}
+                    <div className="">
+                      <Reviews/>
+                    </div>
+                  </div>
+                  {/* map and recommendation part */}
+                  <div className=" sm:col-span-2 bg-green-500">
+                    shrestha
+                  </div>
                 </div>
               </div>
           </div>

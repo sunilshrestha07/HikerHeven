@@ -18,3 +18,7 @@ export interface SingupFormDataInterface {
   email?: string,
   password?: string
 }
+
+export interface reviewInterface {
+  review?: string,
+}
