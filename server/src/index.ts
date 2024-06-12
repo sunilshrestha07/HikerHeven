@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 // Importing routers
 import postRouters from "../src/routes/post.routes";
+import userRouters from "../src/routes/user.routes"
 
 // Getting values from the config
 const port = config.port || 5000;
@@ -35,13 +36,15 @@ const connectDb = async () => {
 };
 connectDb();
 
-// Routes
-app.use('/api', postRouters);
-
 // Test Route
 app.get('/', (req: Request, res: Response) => {
     res.send('Server is running');
 });
+
+// Routes
+app.use('/api', postRouters);
+app.use('/api', userRouters)
+
 
 // Error handling middleware (should be placed at the end)
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
