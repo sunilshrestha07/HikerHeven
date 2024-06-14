@@ -5,7 +5,7 @@ import { errorHandler } from "../utils/errorHandler.utils";
 export const createPost = async (req:Request ,res:Response ,next:NextFunction) =>{
     try {
         //checking all the fields
-        const { name , description , image , level , map} = req.body;
+        const { name ,district, description , image , level , map} = req.body;
 
         if(!name || !description || !image || !level || !map){
             return next (errorHandler(400,"all filed are required"))
@@ -15,8 +15,9 @@ export const createPost = async (req:Request ,res:Response ,next:NextFunction) =
         const newPost = new Post({
             name,
             description,
-            image,
+            image ,
             level,
+            district,
             map
         })
 

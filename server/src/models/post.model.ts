@@ -21,10 +21,10 @@ const postSchema = new Schema({
         type:String,
         required: true
     },
-    userId:{
-        type:Number,
-        required:true
-    }
+    district:{
+        type:String,
+        required: true
+    },
 },{timestamps: true});
 
 const Post = mongoose.model("Post", postSchema);
