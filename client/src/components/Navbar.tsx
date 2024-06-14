@@ -27,7 +27,7 @@ export default function Navbar() {
                         </div>
                         <div className=" flex gap-8 items-center">
                             <div className="">
-                                <Link to='/dashboard'><img className="h-6 sm:h-5 lg:h-6 -mt-1" src="./navImages/profile.png" alt="" /></Link>
+                                <Link to='/dashboard?tab=profile'><img className="h-6 sm:h-5 lg:h-6 -mt-1" src="./navImages/profile.png" alt="" /></Link>
                             </div>
                             <div className=" sm:hidden">
                                 <Hamburger/>

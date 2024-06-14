@@ -4,10 +4,10 @@ import { loginFormDataInterface } from "../declareInterface";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../config";
-import { loginSuccess , loginFail } from "../Redux/userSlice";
+import { loginSuccess  } from "../Redux/userSlice";
 import { useDispatch } from "react-redux";
 
-export default function Signup() {
+export default function Login() {
     const [isErrorDisplayActive,setIsErrorDisplayActive]=useState<boolean>(false)
     const [error,setError]=useState<string | null>(null)
     const navigate = useNavigate()
@@ -78,8 +78,8 @@ export default function Signup() {
                         </div>
                         <button type="submit" className="font-Lora bg-darkGreen text-white p-3 rounded-full font-medium w-8/12 sm:w-1/2 mt-4">Login</button>
                     </form>
-                    <div className=" flex items-center justify-center absolute -top-2 left-1/2 transform -translate-x-1/2 font-Quicksand text-xl">
-                        {isErrorDisplayActive && <div className="text-red-500 mt-4">{error}</div>}
+                    <div className=" flex items-center justify-center absolute -top-2 left-1/2 transform -translate-x-1/2 font-Quicksand text-xl w-full">
+                        {isErrorDisplayActive && <div className="text-red-500 mt-4 w-fulltext-center">{error}</div>}
                     </div>
                 </div>
                 <div className=" flex flex-col justify-center items-center gap-5">
