@@ -13,6 +13,11 @@ export const signup = async (req:Request ,res:Response ,next:NextFunction) =>{
             return next (errorHandler(400,"All fields are required"))
         }
 
+        const exgistingEmail =await User.findOne({email})
+        if(exgistingEmail){
+            return next (errorHandler(500,'Email already exists'))
+        }
+
         //hashing password
         const hashedPassword = bcryptjs.hashSync(password,10)
 
@@ -72,6 +77,56 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
         }).json(rest);
     } catch (error) {
         return next(errorHandler(500, (error as Error).message));
+    }
+};
+
+//google login
+export const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
+    const { name, email, avatar } = req.body;
+
+    try {
+        // Check if the user with the given email already exists
+        const validUser = await User.findOne({ email });
+
+        if (validUser) {
+             // Destructure to exclude password from the response
+        const { password: pass, ...rest } = validUser.toObject();
+
+        // Generate JWT token
+        const token = jwt.sign({ id: validUser._id }, config.JWT_SECRET, { expiresIn: '24h' });
+
+        // Set token as a cookie
+        res.status(200).cookie('access_token', token, {
+            httpOnly: true,
+        }).json(rest);
+
+        } else {
+            // If the user doesn't exist, create a new user with generated password
+            const generatedPassword = name + Math.random().toString(9).slice(-4);
+            const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+
+            const newUser = new User({
+                name,
+                email,
+                password: hashedPassword,
+                avatar,
+            });
+
+            // Generate JWT token for the new user
+            const token = jwt.sign({ id: newUser._id }, config.JWT_SECRET, { expiresIn: '24h' });
+            const { password: pass, ...rest } = newUser.toObject();
+
+            // Save the new user to the database
+            await newUser.save();
+
+            // Send the JWT token in a cookie
+            res.status(200).cookie('access_token', token, {
+                httpOnly: true,
+            }).json(rest);
+        }
+    } catch (error) {
+        // Handle errors and return an appropriate response
+        return next(errorHandler(401, 'Error login with Google'));
     }
 };
 
