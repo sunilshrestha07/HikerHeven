@@ -26,3 +26,10 @@ export interface reviewInterface {
 export interface mapProps{
   iframe?: string
 }
+
+export interface profileInterface {
+  email?: string,
+  password?: string,
+  image?:string,
+  name?:string
+}
