@@ -5,10 +5,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import axios from "axios";
 import { baseUrl } from "../config";
-import { useNavigate } from "react-router-dom";
 
 export default function DashPost() {
-    const navigate = useNavigate()
     const imageRef = useRef<HTMLInputElement | null>(null);
     const [image, setImage] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string>("");
@@ -65,15 +63,6 @@ export default function DashPost() {
                     console.log('Post successful');
                     setIsUploading(false);
                     setIsUploadSuccess(true);
-                    setPostFormData({
-                        name: " ",
-                        district: " ",
-                        description: " ",
-                        image: " ",
-                        level: " ",
-                        map: " ",
-                        rating: 0,
-                    })
                 }
             } catch (error: any) {
                 console.error('Post failed', error);
