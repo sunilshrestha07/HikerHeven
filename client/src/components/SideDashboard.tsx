@@ -32,7 +32,7 @@ export default function SideDashboard() {
                         </Link>
                     )}
                 </div>
-                <div className=" flex flex-col items-center pb-3 sm:pb-5">
+                <div className=" flex flex-col items-center ">
                     <img className=" w-7 sm:w-10 aspect-square rounded-full" src="./crouselImage/lowOne.jpg" alt="User" />
                         <p className=" opacity-85 font-Quicksand text-xs lg:text-base" onClick={handelClick}>suneel</p>
                         <p className=" opacity-85 font-Quicksand text-xs lg:text-base">suneelshrestha9@gmail.com</p>

@@ -33,3 +33,13 @@ export interface profileInterface {
   image?:string,
   name?:string
 }
+
+export interface postInterface {
+  name?:string,
+  rating?:number,
+  district?:string,
+  description?:string,
+  image?:string,
+  map?:string,
+  level?:string
+}
