@@ -10,7 +10,7 @@ export default function Dashboard() {
     console.log(isDashMenuOpen)
   return (
     <>
-        <div className={paddingSize}>
+        <div className={`${paddingSize} rounded-lg overflow-hidden`}>
             <div className=" flex flex-col gap-3">
                 <div className=" flex items-center gap-4 sm:gap-8">
                     <p className=" font-Lora text-2xl sm:text-3xl font-semibold">Dashboard</p>
@@ -28,7 +28,7 @@ export default function Dashboard() {
                     </div>
 
                     {/* rightdashboard */}
-                    <div className={`${isDashMenuOpen ? "col-span-8" : "col-span-6"} bg-green-500 h-full  text-5xl`}>
+                    <div className={`${isDashMenuOpen ? "col-span-8" : "col-span-6"} h-full  text-5xl`}>
                         shrestha
                     </div>
                 </div>
