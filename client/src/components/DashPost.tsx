@@ -1,14 +1,24 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { postInterface } from "../declareInterface";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
+import axios from "axios";
+import { baseUrl } from "../config";
+import { useNavigate } from "react-router-dom";
 
 export default function DashPost() {
+    const navigate = useNavigate()
     const imageRef = useRef<HTMLInputElement | null>(null);
     const [image, setImage] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string>("");
     const [postFormData, setPostFormData] = useState<postInterface>({});
+
+    const [error, setError] = useState<string | null>(null);
+    const [isErrorDisplayActive, setIsErrorDisplayActive] = useState(false);
+    const timeout = 3000; // Timeout duration in milliseconds
+    const [isUploading,setIsUploading]=useState<boolean>(false)
+    const [isUploadSuccess,setIsUploadSuccess]=useState<boolean>(false)
 
     // Handle image change
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,21 +53,62 @@ export default function DashPost() {
     // Handle form submission
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsUploading(true);
+    
         const uploadedImageUrl = await handleImageUpload();
         if (uploadedImageUrl) {
-            setPostFormData({ ...postFormData, image: uploadedImageUrl });
-            console.log({ ...postFormData, imageUrl: uploadedImageUrl });
-            // Perform additional form submission actions here
+            const updatedPostFormData = { ...postFormData, image: uploadedImageUrl };
+    
+            try {
+                const res = await axios.post(`${baseUrl.baseUrl}/api/post/makepost`, updatedPostFormData);
+                if (res.status === 200) {
+                    console.log('Post successful');
+                    setIsUploading(false);
+                    setIsUploadSuccess(true);
+                    setPostFormData({
+                        name: " ",
+                        district: " ",
+                        description: " ",
+                        image: " ",
+                        level: " ",
+                        map: " ",
+                        rating: 0,
+                    })
+                }
+            } catch (error: any) {
+                console.error('Post failed', error);
+                if (axios.isAxiosError(error)) {
+                    setError(error.response?.data?.message || 'An error occurred during posting');
+                } else {
+                    setError('An unknown error occurred during posting');
+                }
+                setIsErrorDisplayActive(true);
+                setIsUploading(false);
+                setIsUploadSuccess(false);
+            }
         } else {
             console.error("Image upload failed");
+            setIsUploading(false);
+            setIsUploadSuccess(false);
         }
     };
+    
+    //hanel error display
+    useEffect(() => {
+        if (isErrorDisplayActive) {
+            const timer = setTimeout(() => {
+                setIsErrorDisplayActive(false);
+            }, timeout);
+
+            return () => clearTimeout(timer);
+        }
+    }, [isErrorDisplayActive, timeout]);
 
     return (
         <>
-            <div className="py-10">
+            <div className="py-10 relative">
                 <div className="font-Lora font-semibold text-2xl sm:text-4xl flex justify-center pb-5">Add Post</div>
-                <div className="w-full flex flex-row justify-center">
+                <div className="w-full flex flex-row justify-center ">
                     <div className="w-1/2">
                         <form className="flex flex-col gap-2" onSubmit={handleFormSubmit}>
                             <div className="flex flex-col">
@@ -105,7 +156,8 @@ export default function DashPost() {
                                     id="level"
                                     required
                                     onChange={handlePostChange}
-                                >
+                                >   
+                                    <option value="">Choose Level</option>
                                     <option value="easy">Easy</option>
                                     <option value="moderate">Moderate</option>
                                     <option value="hard">Hard</option>
@@ -159,12 +211,18 @@ export default function DashPost() {
                             </div>
 
                             <div className="flex justify-center">
-                                <button
+                            <button
                                     type="submit"
-                                    className="font-Lora font-medium text-white text-base px-8 py-3 rounded-full bg-darkGreen mt-5"
+                                    className={`font-Lora font-medium text-white text-base px-8 py-3 rounded-full bg-darkGreen mt-5 ${isUploading ? 'opacity-50' : ''}`}
+                                    disabled={isUploading}
                                 >
-                                    Submit
+                                    {isUploading ? "Uploading..." : "Submit"}
                                 </button>
+                            </div>
+
+                            <div className=" flex items-center justify-center absolute -top-2 left-1/2 transform -translate-x-1/2 font-Quicksand text-xl w-full">
+                                {isErrorDisplayActive && <div className="text-red-500 mt-4 w-fulltext-center">{error}</div>}
+                                {isUploadSuccess && <div className="text-green-500 mt-4 w-fulltext-center">Upload success</div>}
                             </div>
                         </form>
                     </div>
