@@ -1,8 +1,11 @@
 import React, {  useState } from "react"
 import { profileInterface } from "../declareInterface"
+import { useSelector } from "react-redux"
+import { RootState } from "../Redux/store"
 
 export default function DashProfile() {
     const user = { name:'suneel',image:'./crouselImage/lowOne.jpg',email:'shresthasunil9@gmail.com'}
+    const currentUser = useSelector((state:RootState)=>state.user.currentUser)
 
     const [profileFormData,setProfileFormData]=useState<profileInterface>({})
 
@@ -27,12 +30,12 @@ export default function DashProfile() {
                             <div className=" font-Quicksand text-base flex flex-col gap-3 w-10/12 sm:w-9/12">
                                 <input className=" p-3 rounded-xl"
                                 type="text" name="" id="name" 
-                                defaultValue={user.name} onChange={handelProfileChange}
+                                defaultValue={currentUser?.name} onChange={handelProfileChange}
                                 />
 
                                 <input className=" p-3 rounded-xl"
                                 type="text" name="" id="email" 
-                                defaultValue={user.email} onChange={handelProfileChange}
+                                defaultValue={currentUser?.email} onChange={handelProfileChange}
                                 />
                                 
                                 <input className=" p-3 rounded-xl"

@@ -4,8 +4,10 @@ import Favorites from "../components/Favorites"
 import FindMore from "../components/FindMore"
 import Trails from "../components/Trails"
 import { paddingSize } from "../declareSize"
+import ScrollToTop from "../function/ScrollToTop"
 
 export default function Home() {
+  ScrollToTop()
   return (
     <div>
       <div className="">

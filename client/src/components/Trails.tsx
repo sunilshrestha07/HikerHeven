@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { paddingSize } from "../declareSize";
+import { useSelector } from "react-redux";
+import { RootState } from "../Redux/store";
 
 export default function Trails() {
+  const currentUser = useSelector((state:RootState) =>state.user.currentUser)
 
   return (
     <>
@@ -37,9 +40,13 @@ export default function Trails() {
                   <div className=" row-span-1 order-1 sm:order-2 col-span-1 flex flex-col gap-2 sm:gap-3 xl:gap-6 justify-center items-start">
                     <p className="font-Lora text-xl lg:text-4xl font-semibold">Trails that fit your nature</p>
                     <p className="font-Quicksand text-sm lg:text-xl w-3/4">Whether you're pushing your limits or pushing a stroller, we've got you covered.</p>
-                    <Link to='/signup'>
-                      <button className="bg-darkGreen px-4 sm:px-8 py-1 sm:py-2 font-Lora text-base lg:text-2xl text-white rounded-full hover:text-black hover:bg-lightGreen">Sign up</button>
+                    {currentUser ? (
+                      <p className="bg-darkGreen px-4 sm:px-8 py-1 sm:py-2 font-Lora text-base lg:text-2xl text-white rounded-full ">Logged In</p>
+                    ):(
+                      <Link to='/signup'>
+                        <button className="bg-darkGreen px-4 sm:px-8 py-1 sm:py-2 font-Lora text-base lg:text-2xl text-white rounded-full hover:text-black hover:bg-lightGreen">Sign up</button>
                     </Link>
+                    )}
                   </div>
               </div>
             </div>

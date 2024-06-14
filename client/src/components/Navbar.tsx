@@ -1,19 +1,29 @@
-import { Link } from "react-router-dom"
-import { paddingSize } from "../declareSize"
-import Hamburger from "./Hamburger"
+import { Link } from "react-router-dom";
+import { paddingSize } from "../declareSize";
+import Hamburger from "./Hamburger";
+import { useSelector } from "react-redux";
+import { RootState } from "../Redux/store";
+
 export default function Navbar() {
-  return (
-    <>
+    const currentUser = useSelector((state: RootState) => state.user.currentUser);
+
+    return (
         <nav>
             <div className="">
-                <div className={` ${paddingSize} flex justify-between sm:grid sm:grid-cols-7 items-center`}>
+                <div className={`${paddingSize} flex justify-between sm:grid sm:grid-cols-7 items-center`}>
+                    {/* Logo section */}
                     <div className="col-span-2 lg:col-span-3 flex items-center">
-                        <Link to='/'><img className=" h-10 lg:h-12" src="./navImages/logo.svg" alt="" /></Link>
+                        <Link to="/">
+                            <img className="h-10 lg:h-12" src="./navImages/logo.svg" alt="" />
+                        </Link>
                     </div>
-                    <div className=" col-span-5 lg:col-span-4 flex justify-between items-center font-Quicksand font-semibold lg:text-xl">
-                        <div className=" hidden sm:flex justify-between items-center w-5/6 ">
+
+                    {/* Navigation links */}
+                    <div className="col-span-5 lg:col-span-4 flex justify-between items-center font-Quicksand font-semibold lg:text-xl">
+                        {/* Desktop navigation */}
+                        <div className="hidden sm:flex justify-between items-center w-5/6">
                             <div className="hover:text-lightGreen">
-                                <Link to="">Home</Link>
+                                <Link to="/">Home</Link>
                             </div>
                             <div className="hover:text-lightGreen">
                                 <Link to="/contact">Contact Us</Link>
@@ -25,18 +35,28 @@ export default function Navbar() {
                                 <Link to="/saved">Saved</Link>
                             </div>
                         </div>
-                        <div className=" flex gap-8 items-center">
+
+                        {/* Profile and Hamburger menu */}
+                        <div className="flex gap-8 items-center">
+                            {/* Profile link */}
                             <div className="">
-                                <Link to='/dashboard?tab=profile'><img className="h-6 sm:h-5 lg:h-6 -mt-1" src="./navImages/profile.png" alt="" /></Link>
+                                <Link to={{ pathname: '/dashboard', search: '?tab=profile' }}>
+                                    {currentUser?.avatar ? (
+                                        <img className="h-10 w-10 rounded-full" src={currentUser.avatar} alt="avatar" />
+                                    ) : (
+                                        <img className="h-6 sm:h-5 lg:h-6 -mt-1" src="./navImages/profile.png" alt="" />
+                                    )}
+                                </Link>
                             </div>
-                            <div className=" sm:hidden">
-                                <Hamburger/>
+
+                            {/* Hamburger menu */}
+                            <div className="sm:hidden">
+                                <Hamburger />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
-    </>
-  )
+    );
 }
