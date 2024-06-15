@@ -4,16 +4,16 @@ import { errorHandler } from "../utils/errorHandler.utils";
 
 export const postReview = async (req:Request ,res:Response ,next:NextFunction) =>{
     try {
-        const {userId}=req.params
-        const {rating, comment, postId}=req.body
+        const {rating, comment, postId,userImage,userName}=req.body
 
-        if(!comment || !postId){
+        if(!comment || !postId ||!userImage || !rating ||!userName){
             return next (errorHandler(400,"All fields are required"))
         }
 
         const newReview = new Reviews({
             rating,
-            userId,
+            userName,
+            userImage,
             comment,
             postId
         })
@@ -36,12 +36,22 @@ export const getallreviews = async (req:Request ,res:Response ,next:NextFunction
 }  
 
 //get specific post review
-export const getspecificreview = async (req:Request ,res:Response ,next:NextFunction) =>{
+export const getspecificreview = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const {postId} = req.body
-        const reviews = await Reviews.findOne({postId})
-        res.status(200).json(reviews)
+      const { postId } = req.params;
+  
+      if (!postId) {
+        return next(errorHandler(400, "No postId provided")); // Correct HTTP status code for missing postId
+      }
+  
+      const reviews = await Reviews.find({ postId: postId });
+  
+      if (reviews.length === 0) { // Check if reviews array is empty
+        return next(errorHandler(404, "No reviews found for this postId"));
+      }
+  
+      res.status(200).json(reviews);
     } catch (error) {
-        return next (errorHandler(500,(error as Error).message))
+      return next(errorHandler(500, (error as Error).message));
     }
-}  
+  }; 

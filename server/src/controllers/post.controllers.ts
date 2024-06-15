@@ -5,7 +5,7 @@ import { errorHandler } from "../utils/errorHandler.utils";
 export const createPost = async (req:Request ,res:Response ,next:NextFunction) =>{
     try {
         //checking all the fields
-        const { name ,district, description , image , level , map} = req.body;
+        const { name ,district, description , image , level , map,rating} = req.body;
 
         if(!name || !description || !image || !level || !map){
             return next (errorHandler(400,"all filed are required"))
@@ -18,7 +18,8 @@ export const createPost = async (req:Request ,res:Response ,next:NextFunction) =
             image ,
             level,
             district,
-            map
+            map,
+            rating,
         })
 
         //saving new post
@@ -68,3 +69,19 @@ export const testPost = async (req:Request,res:Response,next:NextFunction)=>{
         return next (errorHandler(404,(error as Error).message))
     }
 }
+
+//deleting post
+export const deletePost = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        const deletedPost = await Post.findByIdAndDelete(id);
+        
+        if (!deletedPost) {
+            return next(errorHandler(404, "Post not found"));
+        }
+
+        res.status(200).json({ message: "Post deleted successfully", post: deletedPost });
+    } catch (error) {
+        return next(errorHandler(500, (error as Error).message));
+    }
+};

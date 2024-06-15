@@ -5,6 +5,6 @@ const router = express.Router()
 
 router.post('/review/postreview',postReview)
 router.get('/review/allreviews',getallreviews)
-router.get('/review/specificreview',getspecificreview)
+router.get('/review/:postId',getspecificreview)
 
 export default router
