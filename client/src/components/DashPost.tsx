@@ -10,7 +10,7 @@ export default function DashPost() {
     const imageRef = useRef<HTMLInputElement | null>(null);
     const [image, setImage] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string>("");
-    const [postFormData, setPostFormData] = useState<postInterface>({});
+    const [postFormData, setPostFormData] = useState<postInterface[]>([]);
 
     const [error, setError] = useState<string | null>(null);
     const [isErrorDisplayActive, setIsErrorDisplayActive] = useState(false);
