@@ -12,7 +12,8 @@ interface User {
     avatar: string; 
     name:string,
     id:string,
-    email:string
+    email:string,
+    isAdmin:Boolean
 }
 
 
@@ -35,9 +36,12 @@ const userSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
             state.currentUser = null;
+        },
+        logout(state) {
+            state.currentUser= null
         }
     }
 });
 
-export const { loginSuccess, loginFail } = userSlice.actions;
+export const { loginSuccess, loginFail,logout } = userSlice.actions;
 export default userSlice.reducer;

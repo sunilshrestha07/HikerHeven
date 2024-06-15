@@ -1,9 +1,13 @@
 import React, {  useState } from "react"
 import { profileInterface } from "../declareInterface"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../Redux/store"
+import { logout } from "../Redux/userSlice"
+import { useNavigate } from "react-router-dom"
 
 export default function DashProfile() {
+    const dispath = useDispatch()
+    const navigate = useNavigate()
     const currentUser = useSelector((state:RootState)=>state.user.currentUser)
 
     const [profileFormData,setProfileFormData]=useState<profileInterface>({})
@@ -15,6 +19,11 @@ export default function DashProfile() {
     const handelProfileSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
         console.log(profileFormData)
+    }
+
+    const handelLogout = () =>{
+        dispath(logout())
+        navigate('/')
     }
   return (
     <>
@@ -49,7 +58,7 @@ export default function DashProfile() {
                         <div className="">
                             Delete account
                         </div>
-                        <div className="">
+                        <div className="" onClick={handelLogout}>
                             logout
                         </div>
                     </div>

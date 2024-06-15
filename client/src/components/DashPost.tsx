@@ -1,22 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { postInterface } from "../declareInterface";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import axios from "axios";
 import { baseUrl } from "../config";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function DashPost() {
+    const navigate = useNavigate()
     const imageRef = useRef<HTMLInputElement | null>(null);
     const [image, setImage] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string>("");
     const [postFormData, setPostFormData] = useState<postInterface[]>([]);
-
-    const [error, setError] = useState<string | null>(null);
-    const [isErrorDisplayActive, setIsErrorDisplayActive] = useState(false);
-    const timeout = 3000; // Timeout duration in milliseconds
     const [isUploading,setIsUploading]=useState<boolean>(false)
-    const [isUploadSuccess,setIsUploadSuccess]=useState<boolean>(false)
 
     // Handle image change
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,46 +50,33 @@ export default function DashPost() {
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsUploading(true);
+        
     
         const uploadedImageUrl = await handleImageUpload();
         if (uploadedImageUrl) {
             const updatedPostFormData = { ...postFormData, image: uploadedImageUrl };
-    
+            console.log(updatedPostFormData)
             try {
                 const res = await axios.post(`${baseUrl.baseUrl}/api/post/makepost`, updatedPostFormData);
                 if (res.status === 200) {
-                    console.log('Post successful');
+                    toast.success('Post successful');
                     setIsUploading(false);
-                    setIsUploadSuccess(true);
+                    navigate('/')
                 }
             } catch (error: any) {
                 console.error('Post failed', error);
                 if (axios.isAxiosError(error)) {
-                    setError(error.response?.data?.message || 'An error occurred during posting');
+                    toast.error(error.response?.data?.message || 'An error occurred during posting');
                 } else {
-                    setError('An unknown error occurred during posting');
+                    toast.error('An unknown error occurred during posting');
                 }
-                setIsErrorDisplayActive(true);
                 setIsUploading(false);
-                setIsUploadSuccess(false);
             }
         } else {
             console.error("Image upload failed");
             setIsUploading(false);
-            setIsUploadSuccess(false);
         }
     };
-    
-    //hanel error display
-    useEffect(() => {
-        if (isErrorDisplayActive) {
-            const timer = setTimeout(() => {
-                setIsErrorDisplayActive(false);
-            }, timeout);
-
-            return () => clearTimeout(timer);
-        }
-    }, [isErrorDisplayActive, timeout]);
 
     return (
         <>
@@ -207,11 +192,6 @@ export default function DashPost() {
                                 >
                                     {isUploading ? "Uploading..." : "Submit"}
                                 </button>
-                            </div>
-
-                            <div className=" flex items-center justify-center absolute -top-2 left-1/2 transform -translate-x-1/2 font-Quicksand text-xl w-full">
-                                {isErrorDisplayActive && <div className="text-red-500 mt-4 w-fulltext-center">{error}</div>}
-                                {isUploadSuccess && <div className="text-green-500 mt-4 w-fulltext-center">Upload success</div>}
                             </div>
                         </form>
                     </div>

@@ -1,11 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootState } from "../Redux/store";
 import { useEffect, useState } from "react";
+import { Hike, postInterface } from "../declareInterface";
+import { savedHikes } from "../Redux/savedSlice";
+import { toast } from "react-toastify";
 
 export default function Recommendation() {
+    const dispatch = useDispatch()
     const RecommendationHike = useSelector((state: RootState) => state.post.hikes);
     const [randomIndices, setRandomIndices] = useState<number[]>([]);
+    const currentUser = useSelector((state:RootState)=>state.user.currentUser)
 
     // Function to generate three unique random indices
     const generateRandomIndices = (): number[] => {
@@ -19,6 +24,12 @@ export default function Recommendation() {
         }
         return indices;
     };
+
+    const handleSaveHike = (hike: postInterface) => {
+        const { _id, name, rating, district, description, image, map, level } = hike;
+        const hikeToSave: Hike = { _id, name, rating, district, description, image, map, level };
+        dispatch(savedHikes([hikeToSave])); 
+      };
 
     useEffect(() => {
         // Generate random indices on component mount or whenever RecommendationHike changes
@@ -59,7 +70,7 @@ export default function Recommendation() {
                                                 </div>
                                             </Link>
                                             {/* For adding to saved */}
-                                            <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1">
+                                            <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1" onClick={currentUser ? ()=>handleSaveHike(hike):()=>toast.info('Login first')}>
                                                 <img className="h-3 sm:h-5" src="/navImages/save.png" alt="" />
                                             </div>
                                         </div>

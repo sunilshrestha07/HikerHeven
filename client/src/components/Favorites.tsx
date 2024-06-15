@@ -67,7 +67,7 @@ export default function Favorites() {
                                             </div>
                                         </div>
                                     </Link>
-                                    <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1" onClick={currentUser ? () => handleSaveHike(hike) : () => toast.info("Sign up first")}>
+                                    <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1" onClick={currentUser ? () => handleSaveHike(hike) : () => toast.info("login first")}>
                                         <img className="h-3 sm:h-5" src="/navImages/save.png" alt="" />
                                     </div>
                                 </div>

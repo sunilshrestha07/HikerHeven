@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../Redux/store";
 import { Hike, postInterface } from "../declareInterface";
 import { savedHikes } from "../Redux/savedSlice";
+import { toast } from "react-toastify";
 
 export default function AllHikesPage() {
   const dispatch = useDispatch()
@@ -14,7 +15,7 @@ export default function AllHikesPage() {
     const { _id, name, rating, district, description, image, map, level } = hike;
     const hikeToSave: Hike = { _id, name, rating, district, description, image, map, level };
     dispatch(savedHikes([hikeToSave])); 
-};
+  };
   return (
     <>
       <div className="">
@@ -45,7 +46,7 @@ export default function AllHikesPage() {
                             </div>  
                         </Link>
                         {/* for adding to saved */}
-                        <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1"onClick={currentUser ? () => handleSaveHike(hike) : () => alert("Sign up first")}>
+                        <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1"onClick={currentUser ? () => handleSaveHike(hike) : () => toast.info("Login first")}>
                             <img className=" h-3 sm:h-5" src="/navImages/save.png" alt="" />
                         </div>
                     </div>
