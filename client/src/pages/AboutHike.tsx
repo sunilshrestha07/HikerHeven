@@ -27,6 +27,7 @@ export default function AboutHike() {
     return <div>Hike not found</div>;
   }
 
+
   return (
     <>
       <div className="">
@@ -71,7 +72,7 @@ export default function AboutHike() {
                   </div>
                   {/* Reviews */}
                   <div className="">
-                    <Reviews />
+                    <Reviews  postId={specificHike._id} />
                   </div>
                 </div>
                 {/* Map and Recommendation part */}

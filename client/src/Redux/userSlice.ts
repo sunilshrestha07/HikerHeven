@@ -11,7 +11,7 @@ interface UserState {
 interface User {
     avatar: string; 
     name:string,
-    id:string,
+    _id:string,
     email:string,
     isAdmin:Boolean
 }

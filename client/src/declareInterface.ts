@@ -20,7 +20,12 @@ export interface SingupFormDataInterface {
 }
 
 export interface reviewInterface {
-  review?: string,
+  comment?: string;
+  rating?: number;
+  userName?: string;
+  postId?: string;
+  userImage?:string
+
 }
 
 export interface mapProps{
@@ -54,4 +59,17 @@ export interface profileInterface {
   image: string;
   map: string;
   level: string | null;
+}
+
+export interface reviewProp {
+  postId: string | null;
+}
+
+export interface reviewdataInterface{
+  comment: string | null;
+  rating: number ;
+  userName: string | null;
+  userImage? : string 
+  postId: string | null;
+  createdAt?: string 
 }

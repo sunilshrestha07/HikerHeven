@@ -11,12 +11,12 @@ export default function Navbar() {
 
     return (
         <nav>
-            <div className="">
+            <div className=" ">
                 <div className={`${paddingSize} flex justify-between sm:grid sm:grid-cols-7 items-center`}>
                     {/* Logo section */}
                     <div className="col-span-2 lg:col-span-3 flex items-center">
                         <Link to="/">
-                            <img className="h-10 lg:h-12" src="./navImages/logo.svg" alt="" />
+                            <p className="text-xl font-Lora uppercase font-bold text-darkGreen ">HikerHeven</p>
                         </Link>
                     </div>
 
