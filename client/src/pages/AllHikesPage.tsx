@@ -1,33 +1,30 @@
 import { Link } from "react-router-dom";
 import { paddingSize } from "../declareSize";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../Redux/store";
+import { Hike, postInterface } from "../declareInterface";
+import { savedHikes } from "../Redux/savedSlice";
 
-export default function Saved() {
-  const savedHikes =useSelector((state:RootState)=>state.saved.savedhikes)
-  const noOfSavedHikes = savedHikes.length
+export default function AllHikesPage() {
+  const dispatch = useDispatch()
+  const allHikes = useSelector((state:RootState)=>state.post.hikes)
+  const currentUser = useSelector((state:RootState)=>state.user.currentUser)
+
+  const handleSaveHike = (hike: postInterface) => {
+    const { _id, name, rating, district, description, image, map, level } = hike;
+    const hikeToSave: Hike = { _id, name, rating, district, description, image, map, level };
+    dispatch(savedHikes([hikeToSave])); 
+};
   return (
     <>
       <div className="">
         <div className={`${paddingSize} flex flex-col gap-10`}>
           <div className=" flex flex-col gap-3">
-            <p className="font-Lora text-xl sm:text-4xl font-semibold">Saved Hikes</p>
-            {noOfSavedHikes ? (
-              <p className="font-Lora text-base sm:text-xl font-medium opacity-70 capitalize">Total hikes : {noOfSavedHikes}</p>
-            ):(
-              <p></p>
-            )}
+            <p className="font-Lora text-xl sm:text-4xl font-semibold">Find your best hike</p>
           </div>
           <div className="">
-            {savedHikes.length > 0 ? (
-              <div className=""></div>
-            ):(
-              <div className=" font-Lora text-xl sm:text-4xl font-semibold w-full text-center">
-                <p>You have no saved hikes !</p>
-              </div>
-            )}
             <div className=" grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-8  ">
-                {savedHikes 
+                {allHikes 
                 //showing only 4 hikes
                 .map((hike,index)=>(
                     <div className=" col-span-1 cursor-pointer relative" key={index}>
@@ -47,6 +44,10 @@ export default function Saved() {
                                 </div>
                             </div>  
                         </Link>
+                        {/* for adding to saved */}
+                        <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1"onClick={currentUser ? () => handleSaveHike(hike) : () => alert("Sign up first")}>
+                            <img className=" h-3 sm:h-5" src="/navImages/save.png" alt="" />
+                        </div>
                     </div>
                 ))}
             </div>

@@ -6,10 +6,10 @@ import axios from "axios";
 import { baseUrl } from "../config";
 import { loginSuccess  } from "../Redux/userSlice";
 import { useDispatch } from "react-redux";
+import { toast } from 'react-toastify';
 
 export default function Login() {
     const [isErrorDisplayActive,setIsErrorDisplayActive]=useState<boolean>(false)
-    const [error,setError]=useState<string | null>(null)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loginFormData, setLoginFormData] = useState<loginFormDataInterface>({
@@ -27,15 +27,15 @@ export default function Login() {
             const res = await axios.post(`${baseUrl.baseUrl}/api/user/login`,loginFormData)
             if(res.status === 200){
                 dispatch(loginSuccess(res.data))
-                console.log('login success')
+                toast.success('login success')
                 navigate('/')
             }
         } catch (error: any) {
             console.error('login failed', error);
             if (axios.isAxiosError(error)) {
-                setError(error.response?.data?.message || 'An error occurred during login up');
+                toast.error(error.response?.data?.message || 'An error occurred during login up');
             } else {
-                setError('An unknown error occurred during login up');
+                toast.error('An unknown error occurred during login up');
             }
             setIsErrorDisplayActive(true);
         }
@@ -78,9 +78,6 @@ export default function Login() {
                         </div>
                         <button type="submit" className="font-Lora bg-darkGreen text-white p-3 rounded-full font-medium w-8/12 sm:w-1/2 mt-4">Login</button>
                     </form>
-                    <div className=" flex items-center justify-center absolute -top-2 left-1/2 transform -translate-x-1/2 font-Quicksand text-xl w-full">
-                        {isErrorDisplayActive && <div className="text-red-500 mt-4 w-fulltext-center">{error}</div>}
-                    </div>
                 </div>
                 <div className=" flex flex-col justify-center items-center gap-5">
                     <div className=" font-Lora opacity-60">

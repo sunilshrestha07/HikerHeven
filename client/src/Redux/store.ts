@@ -3,11 +3,13 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import userReducer from './userSlice';
 import postReducer from './postSlice'
+import savedReducer from './savedSlice'
 
 // Combine your reducers into a root reducer
 const rootReducer = combineReducers({
     user: userReducer,
-    post: postReducer
+    post: postReducer,
+    saved: savedReducer
 });
 
 // Configuration for Redux Persist

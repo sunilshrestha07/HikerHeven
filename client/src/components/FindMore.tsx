@@ -1,8 +1,6 @@
-
 import { Link } from "react-router-dom";
 
 export default function FindMore() {
-
     return (
         <div className="">
             <div className="sm:mt-8">
@@ -21,7 +19,7 @@ export default function FindMore() {
                         <p className="font-Quicksand text-sm sm:text-xs lg:text-base text-white">
                             Embark on a journey of discovery as you lace up your boots and venture into the great outdoors.
                         </p>
-                        <Link to="/level/all">
+                        <Link to="/allhikes">
                             <button className="bg-lightGreen px-5 py-2 rounded-full font-Lora text-sm lg:text-xl font-semibold hover:text-white hover:bg-darkGreen border-2 border-lightGreen">
                                 Find More
                             </button>

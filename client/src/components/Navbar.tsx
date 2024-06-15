@@ -6,6 +6,8 @@ import { RootState } from "../Redux/store";
 
 export default function Navbar() {
     const currentUser = useSelector((state: RootState) => state.user.currentUser);
+    const savedHikes =useSelector((state:RootState)=>state.saved.savedhikes)
+    const noOfSavedHikes = savedHikes.length
 
     return (
         <nav>
@@ -31,23 +33,32 @@ export default function Navbar() {
                             <div className="hover:text-lightGreen">
                                 <Link to="/about">About Us</Link>
                             </div>
-                            <div className="hover:text-lightGreen">
+                            <div className="hover:text-lightGreen relative">
                                 <Link to="/saved">Saved</Link>
+                                {noOfSavedHikes > 0 ? (
+                                    <div className=" bg-darkGreen w-3 h-3 rounded-full absolute -top-1 -right-3">
+                                    </div>
+                                ):(
+                                    ""
+                                )}
                             </div>
                         </div>
 
                         {/* Profile and Hamburger menu */}
                         <div className="flex gap-8 items-center">
-                            {/* Profile link */}
+                            {/* if currentUser is available goto page dashboard else singup page */}
+                            {currentUser ? (
                             <div className="">
-                                <Link to={{ pathname: '/dashboard', search: '?tab=profile' }}>
-                                    {currentUser?.avatar ? (
-                                        <img className="h-10 w-10 rounded-full" src={currentUser.avatar} alt="avatar" />
-                                    ) : (
-                                        <img className="h-6 sm:h-5 lg:h-6 -mt-1" src="./navImages/profile.png" alt="" />
-                                    )}
+                                <Link to='/dashboard?tab=profile'>
+                                    <img className="h-10 w-10 rounded-full" src={currentUser.avatar} alt="avatar" />
                                 </Link>
                             </div>
+                            ):(
+                                <Link to='/signup'>
+                                    <img className="h-6 sm:h-5 lg:h-6 -mt-1" src="./navImages/profile.png" alt="" />
+                                </Link>
+                            )}
+
 
                             {/* Hamburger menu */}
                             <div className="sm:hidden">

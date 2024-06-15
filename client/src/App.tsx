@@ -10,6 +10,7 @@ import Register from "./pages/Register"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Dashboard from "./pages/Dashboard"
+import AllHikesPage from "./pages/AllHikesPage"
 
 function App() {
 
@@ -22,12 +23,13 @@ function App() {
             <Route path ="/contact" element={<ContactUs/>}/>
             <Route path ="/about" element={<About/>}/>
             <Route path ="/saved" element={<Saved/>}/>
-            <Route path ="/aboutHike" element={<AboutHike/>}/>
+            <Route path ="/aboutHike/:id" element={<AboutHike/>}/>
             <Route path="/level/:level" element={<HikesPage/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/allhikes" element={<AllHikesPage/>}/>
           </Routes>
       </BrowserRouter>
     </>

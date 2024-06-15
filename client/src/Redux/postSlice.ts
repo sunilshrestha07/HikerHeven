@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface Hike {
+    _id:string | null,
     name: string | null;
     rating?: number;
     district: string | null;

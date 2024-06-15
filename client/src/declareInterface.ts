@@ -34,12 +34,24 @@ export interface profileInterface {
   name?:string
 }
 
-export interface postInterface {
-  name?:string,
-  rating?:number,
-  district?:string,
-  description?:string,
-  image?:string,
-  map?:string,
-  level?:string
+ export interface postInterface {
+  _id: string | null; 
+  name: string | null;
+  rating?: number;
+  district: string | null;
+  description: string | null;
+  image: string;
+  map: string;
+  level: string | null;
+}
+
+ export interface Hike {
+  _id: string | null;
+  name: string | null;
+  rating?: number;
+  district: string | null;
+  description: string | null;
+  image: string;
+  map: string;
+  level: string | null;
 }

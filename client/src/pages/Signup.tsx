@@ -4,6 +4,7 @@ import { SingupFormDataInterface } from "../declareInterface";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../config";
+import { toast } from 'react-toastify';
 
 export default function Signup() {
     const navigate = useNavigate();
@@ -26,17 +27,15 @@ export default function Signup() {
         try {
             const res = await axios.post(`${baseUrl.baseUrl}/api/user/signup`, loginFormData);
             if (res.status === 200) {
-                console.log('Sign up success');
+                toast.success('Sign up success');
                 navigate('/login');
             }
         } catch (error: any) {
-            console.error('Sign up failed', error);
             if (axios.isAxiosError(error)) {
-                setError(error.response?.data?.message || 'An error occurred during sign up');
+                toast.error(error.response?.data?.message || 'An error occurred during sign up');
             } else {
-                setError('An unknown error occurred during sign up');
+                toast.error('An unknown error occurred during sign up');
             }
-            setIsErrorDisplayActive(true);
         }
     };
 

@@ -8,7 +8,7 @@ const MapComponent: React.FC<mapProps> = ({ iframe }) => {
   }
   return (
     <div className="w-full">
-      <p className="font-Lora text-2xl sm:text-3xl">Map</p>
+      <p className="font-Lora text-2xl sm:text-3xl pb-3">Map</p>
       <div
         className="w-full aspect-video overflow-hidden rounded-md border-2"
         dangerouslySetInnerHTML={{ __html: iframe }}

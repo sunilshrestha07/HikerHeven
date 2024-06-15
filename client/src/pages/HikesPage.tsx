@@ -1,31 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { paddingSize } from "../declareSize";
+import { useSelector } from "react-redux";
+import { RootState } from "../Redux/store";
 
 export default function HikesPage() {
-  const favorite =[
-    {name:'ChampaDevi',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowOne.jpg',level:'hard'},
-    {name:'Pia Park',location:'Ekantakuna',rating:'4.5',image:'/crouselImage/lowTwo.jpg',level:'moderate'},
-    {name:'Gomba Devi',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowThree.jpg',level:'easy'},      
-    {name:'Godawari',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowFour.jpg',level:'hard'},
-    {name:'ChampaDevi',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowFive.jpg',level:'hard'},
-    {name:'Pia Park',location:'Ekantakuna',rating:'4.5',image:'/crouselImage/lowTwo.jpg',level:'moderate'},
-    {name:'Gomba Devi',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowThree.jpg',level:'easy'},      
-    {name:'Godawari',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowFour.jpg',level:'hard'},
-    {name:'ChampaDevi',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowFive.jpg',level:'hard'},
-    {name:'ChampaDevi',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowOne.jpg',level:'hard'},
-    {name:'Pia Park',location:'Ekantakuna',rating:'4.5',image:'/crouselImage/lowTwo.jpg',level:'moderate'},
-    {name:'Gomba Devi',location:'Laltipur',rating:'4.5',image:'/crouselImage/lowThree.jpg',level:'easy'}, 
-]
+  const { level } = useParams<{ level: string }>();
+  const allHikes = useSelector((state:RootState)=>state.post.hikes)
+  const hikesByLevel = allHikes.filter(hike => hike.level === level);
   return (
     <>
       <div className="">
         <div className={`${paddingSize} flex flex-col gap-10`}>
-          <div className="">
+          <div className=" flex flex-col gap-3">
             <p className="font-Lora text-xl sm:text-4xl font-semibold">Find your best hike</p>
+            {level ? (
+              <p className="font-Lora text-base sm:text-xl font-medium opacity-70 capitalize">Level:{level}</p>
+            ):(
+              <p></p>
+            )}
           </div>
           <div className="">
             <div className=" grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-8  ">
-                {favorite
+                {hikesByLevel 
                 //showing only 4 hikes
                 .map((hike,index)=>(
                     <div className=" col-span-1 cursor-pointer relative" key={index}>
@@ -36,7 +32,7 @@ export default function HikesPage() {
                                 </div>
                                 <div className=" mt-1 p-1">
                                     <p className="text-xs sm:text-base font-Lora font-semibold">{hike.name}</p>
-                                    <p className="text-xs sm:text-base font-Lora opacity-90">{hike.location}</p>
+                                    <p className="text-xs sm:text-base font-Lora opacity-90">{hike.district}</p>
                                     <div className=" flex gap-2  items-center">
                                         <p className="text-xs sm:text-base  font-Lora opacity-90">{hike.rating}</p>
                                         <img src="/navImages/star.png" className="h-3 " alt="" />

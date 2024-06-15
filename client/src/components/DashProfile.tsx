@@ -4,7 +4,6 @@ import { useSelector } from "react-redux"
 import { RootState } from "../Redux/store"
 
 export default function DashProfile() {
-    const user = { name:'suneel',image:'./crouselImage/lowOne.jpg',email:'shresthasunil9@gmail.com'}
     const currentUser = useSelector((state:RootState)=>state.user.currentUser)
 
     const [profileFormData,setProfileFormData]=useState<profileInterface>({})
@@ -21,39 +20,37 @@ export default function DashProfile() {
     <>
         <div className="">
             <div className=" flex justify-center items-center w-full ">
-                <div className="  w-full sm:w-full md:w-2/3 lg:w-1/2 aspect-[3/4] flex items-center justify-center">
-                    <div className=" flex flex-col  justify-center items-center w-full gap-10">
-                        <form className=" flex flex-col items-center gap-4" onSubmit={handelProfileSubmit}>
-                            <div className=" w-1/2 aspect-square rounded-full overflow-hidden">
-                                <img className="w-full h-full object-cover" src={user.image} alt="" />
-                            </div>
-                            <div className=" font-Quicksand text-base flex flex-col gap-3 w-10/12 sm:w-9/12">
-                                <input className=" p-3 rounded-xl"
-                                type="text" name="" id="name" 
-                                defaultValue={currentUser?.name} onChange={handelProfileChange}
-                                />
+                <div className=" w-full flex flex-col justify-center items-center pt-10 gap-4">
+                    <form className=" w-full sm:w-10/12 lg:w-1/2 flex flex-col  items-center gap-6" onSubmit={handelProfileSubmit}>
+                        <div className=" w-1/2 aspect-square rounded-full overflow-hidden">
+                            <img className="w-full h-full object-cover" src={currentUser?.avatar} alt="" />
+                        </div>
+                        <div className=" font-Quicksand text-base flex flex-col gap-3 w-10/12 sm:w-9/12">
+                            <input className=" p-3 rounded-xl"
+                                    type="text" name="" id="name" 
+                                    defaultValue={currentUser?.name} onChange={handelProfileChange}
+                                    placeholder="Name"/>
 
-                                <input className=" p-3 rounded-xl"
-                                type="text" name="" id="email" 
-                                defaultValue={currentUser?.email} onChange={handelProfileChange}
-                                />
-                                
-                                <input className=" p-3 rounded-xl"
-                                type="password" name="" id="password" placeholder="***********"
-                                onChange={handelProfileChange}
-                                />
-                            </div>
-                            <div className="">
-                                <button  className="bg-darkGreen font-Quicksand font-bold text-base px-6 py-2 rounded-full text-white" type="submit">Save Change</button>
-                            </div>
-                        </form>
-                        <div className="w-full flex flex-row justify-around font-Quicksand text-red-500 font-semibold text-base hover:cursor-pointer ">
-                            <div className="">
-                                Delete account
-                            </div>
-                            <div className="">
-                                logout
-                            </div>
+                            <input className=" p-3 rounded-xl"
+                                    type="text" name="" id="email" 
+                                    defaultValue={currentUser?.email} onChange={handelProfileChange}
+                                    placeholder="Email"/>
+                                    
+                            <input className=" p-3 rounded-xl"
+                                    type="password" name="" id="password" placeholder="***********"
+                                    onChange={handelProfileChange}
+                                    />
+                        </div>
+                        <div className="">
+                            <button  className="bg-darkGreen font-Quicksand font-bold text-base px-6 py-2 rounded-full text-white" type="submit">Save Change</button>
+                        </div>
+                    </form>
+                    <div className="w-full flex flex-row justify-around font-Quicksand text-red-500 font-semibold text-base hover:cursor-pointer ">
+                        <div className="">
+                            Delete account
+                        </div>
+                        <div className="">
+                            logout
                         </div>
                     </div>
                 </div>

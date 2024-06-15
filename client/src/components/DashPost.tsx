@@ -97,8 +97,8 @@ export default function DashPost() {
         <>
             <div className="py-10 relative">
                 <div className="font-Lora font-semibold text-2xl sm:text-4xl flex justify-center pb-5">Add Post</div>
-                <div className="w-full flex flex-row justify-center ">
-                    <div className="w-1/2">
+                <div className="w-full flex flex-row justify-center">
+                    <div className=" w-full px-5 sm:px-0 md:w-2/3 lg:w-1/2">
                         <form className="flex flex-col gap-2" onSubmit={handleFormSubmit}>
                             <div className="flex flex-col">
                                 <label htmlFor="name">Name of the hike</label>
