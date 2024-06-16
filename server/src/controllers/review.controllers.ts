@@ -45,13 +45,43 @@ export const getspecificreview = async (req: Request, res: Response, next: NextF
       }
   
       const reviews = await Reviews.find({ postId: postId });
-  
-      if (reviews.length === 0) { // Check if reviews array is empty
-        return next(errorHandler(404, "No reviews found for this postId"));
+
+      if(reviews.length === 0){
+        return next (errorHandler(404,'No reviews found'))
       }
-  
+
       res.status(200).json(reviews);
     } catch (error) {
       return next(errorHandler(500, (error as Error).message));
     }
   }; 
+
+//delete review
+
+export const deleteReview = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { commentId } = req.params;
+    const deletedReview = await Reviews.findByIdAndDelete(commentId);
+    if (!deletedReview) {
+      return next(errorHandler(404, 'Review not found'));
+    }else{
+      res.status(200).json({ message: 'Review deleted successfully' });
+    }
+  } catch (error) {
+    return next(errorHandler(500, (error as Error).message));
+  }
+};
+
+
+export const review = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { commentId } = req.params;
+    const review = await Reviews.findById(commentId);
+    if (!review) {
+      return next(errorHandler(404, 'Review not found'));
+    }
+    res.status(200).json(review);
+  } catch (error) {
+    return next(errorHandler(500, (error as Error).message));
+  }
+};
