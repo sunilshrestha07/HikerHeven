@@ -30,9 +30,15 @@ const savedSlice = createSlice({
                     state.savedhikes.push(hikeToAdd);
                 }
             });
-        }
+        },
+        clearHike(state) {
+            state.savedhikes = [];
+        },
+        deleteSpecificHike(state, action: PayloadAction<string>) {
+            state.savedhikes = state.savedhikes.filter(hike => hike._id !== action.payload);
+        },
     }
 });
 
-export const { savedHikes } = savedSlice.actions;
+export const { savedHikes, clearHike, deleteSpecificHike } = savedSlice.actions;
 export default savedSlice.reducer;

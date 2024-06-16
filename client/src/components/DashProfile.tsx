@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../Redux/store"
 import { logout } from "../Redux/userSlice"
 import { useNavigate } from "react-router-dom"
+import { clearHike } from "../Redux/savedSlice"
 
 export default function DashProfile() {
     const dispath = useDispatch()
@@ -23,6 +24,7 @@ export default function DashProfile() {
 
     const handelLogout = () =>{
         dispath(logout())
+        dispath(clearHike())
         navigate('/')
     }
   return (
