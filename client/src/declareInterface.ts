@@ -66,6 +66,7 @@ export interface reviewProp {
 }
 
 export interface reviewdataInterface{
+  _id:string
   comment: string | null;
   rating: number ;
   userName: string | null;

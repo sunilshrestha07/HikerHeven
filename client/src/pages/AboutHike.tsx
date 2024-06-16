@@ -3,11 +3,11 @@ import MapComponent from "../components/MapComponent";
 import Recommendation from "../components/Recommendation";
 import Reviews from "../components/Reviews";
 import { paddingSize } from "../declareSize";
-import ScrollToTop from "../function/ScrollToTop";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../Redux/store";
 import { Hike, postInterface } from "../declareInterface";
 import { savedHikes } from "../Redux/savedSlice";
+import { useEffect } from "react";
 
 export default function AboutHike() {
   const dispatch = useDispatch()
@@ -27,11 +27,17 @@ export default function AboutHike() {
     return <div>Hike not found</div>;
   }
 
+  function ScrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  
+    useEffect(() => {
+      ScrollToTop();
+    }, [specificHike]);
 
   return (
     <>
       <div className="">
-        <ScrollToTop />
         <div className={`${paddingSize} mt-2 sm:mt-6`}>
           <div className="rounded-lg overflow-hidden">
             <div className="relative w-full h-full">
