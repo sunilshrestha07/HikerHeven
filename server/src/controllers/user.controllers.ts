@@ -139,3 +139,58 @@ export const users = async (req: Request, res: Response, next: NextFunction) => 
         return next(errorHandler(500, (error as Error).message));
     }
 }
+
+
+//update userprofile
+
+export const userUpdate = async (req: Request, res: Response, next: NextFunction) => {
+    const { userId } = req.params;
+    if (!userId) {
+        return next(errorHandler(401, 'You are not authorized to update'));
+    }
+
+    if (req.body.password) {
+        req.body.password = bcryptjs.hashSync(req.body.password, 10);
+    }
+
+    try {
+        const updatedUser = await User.findByIdAndUpdate(userId, {
+            $set: {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+                avatar: req.body.avatar
+            }
+        }, { new: true });
+
+        if (!updatedUser) {
+            return next(errorHandler(404, 'User not found'));
+        }
+
+        const {password,...rest}=updatedUser.toObject()
+        res.status(200).json(rest)
+    } catch (error) {
+        return next(errorHandler(500, (error as Error).message));
+    }
+};
+
+
+//deleter user 
+export const deleteUser =  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const {userId} = req.params
+        if(!userId){
+            return next (errorHandler(404,'No such user'))
+        }
+        const deleteUser = await User.findByIdAndDelete(userId)
+        if(!deleteUser){
+            return next (errorHandler(404,'No such user'))
+        }else{
+            res.status(200).json({ message: 'User deleted successfully' });
+        }
+
+        
+    } catch (error) {
+        return next (errorHandler(500,(error as Error).message))
+    }
+}
