@@ -71,7 +71,7 @@ export default function Saved() {
                           </div>
                         </Link>
                         <div
-                          className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1"
+                          className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1 hover:bg-lightGreen"
                           onClick={() => handleDeleteFromSaved(hike._id || "")}
                         >
                           <img className="h-3 sm:h-5" src="/navImages/close.png" alt="" />
