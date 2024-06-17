@@ -11,7 +11,7 @@ export default function Navbar() {
 
     return (
         <nav>
-            <div className=" ">
+            <div className=" py-5">
                 <div className={`${paddingSize} flex justify-between sm:grid sm:grid-cols-7 items-center`}>
                     {/* Logo section */}
                     <div className="col-span-2 lg:col-span-3 flex items-center">

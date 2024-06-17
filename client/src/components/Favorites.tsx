@@ -14,6 +14,7 @@ export default function Favorites() {
     const dispatch = useDispatch();
     const currentUser = useSelector((state: RootState) => state.user.currentUser);
     const [favoriteHikes, setFavoriteHikes] = useState<postInterface[]>([]);
+    const hikes = useSelector((state: RootState) => state.post.hikes);
 
     useEffect(() => {
         getAllPost();
@@ -25,6 +26,7 @@ export default function Favorites() {
             if (res.status === 200) {
                 setFavoriteHikes(res.data);
                 dispatch(getAllHikes(res.data));
+                console.log(favoriteHikes)
             }
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -47,7 +49,7 @@ export default function Favorites() {
                     </div>
                     <div className="">
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-4">
-                            {favoriteHikes
+                            {hikes
                             .slice(0,4)
                             .map((hike, index) => (
                                 <div className="col-span-1 cursor-pointer relative" key={index}>

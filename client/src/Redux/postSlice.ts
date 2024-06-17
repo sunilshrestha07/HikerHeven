@@ -13,10 +13,12 @@ interface Hike {
 
 interface PostState {
     hikes: Hike[];
+    isloaded: boolean
 }
 
 const initialState: PostState = {
-    hikes: []
+    hikes: [],
+    isloaded: false
 };
 
 const postSlice = createSlice({
@@ -25,6 +27,7 @@ const postSlice = createSlice({
     reducers: {
         getAllHikes(state, action: PayloadAction<Hike[]>) {
             state.hikes = action.payload;
+            state.isloaded = true
         }
     }
 });

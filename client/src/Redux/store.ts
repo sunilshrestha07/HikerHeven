@@ -9,7 +9,7 @@ import savedReducer from './savedSlice'
 const rootReducer = combineReducers({
     user: userReducer,
     post: postReducer,
-    saved: savedReducer
+    saved: savedReducer,
 });
 
 // Configuration for Redux Persist
