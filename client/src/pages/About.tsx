@@ -4,7 +4,7 @@ export default function About() {
   return (
     <>
       <div className={paddingSize}>
-        <div className=" flex flex-col gap-10">
+        <div className=" flex flex-col gap-10 mt-16">
           <div className=" flex flex-col justify-center items-center gap-6 mt-10">
             <p className="text-4xl font-Lora font-semibold ">About us</p>
             <p className="text-base sm:text-xl font-Quicksand ">Welcome to HikerHeaven, your ultimate guide to exploring the great outdoors. At HikerHeaven, we believe every trail has a story, and we're here to help you discover yours. Our mission is to inspire hikers of all levels with detailed trail guides, expert tips, and community insights. Whether you're a seasoned adventurer or a novice, HikerHeaven connects you with nature's most breathtaking landscapes, ensuring your hiking experience is safe, enjoyable, and enriching. Lace up your boots and let HikerHeaven be your guide to the wonders of the wilderness.</p>

@@ -28,7 +28,9 @@ const Reviews: React.FC<reviewProp> = ({ postId }) => {
   const handleReviewSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsUploading(true);
+    setReviewFormData({...reviewFormData,rating:starRating})
     const updatedReview = reviewFormData
+    console.log(updatedReview)
     try {
       const res = await axios.post(`${baseUrl.baseUrl}/api/review/postreview`, updatedReview);
       if (res.status === 200) {

@@ -45,7 +45,7 @@ export default function Login() {
 
   return (
     <>
-        <div className="  w-full flex justify-center items-center">
+        <div className="  w-full flex justify-center items-center mt-20">
             <div className=" bg-gray-100 w-10/12 sm:w-3/5 xl:w-2/6 px-5 py-16 mt-8 rounded-md border-2 border-gray-300 flex flex-col gap-6 relative">
                 <div className="flex justify-center items-center">
                     <img className="h-20" src="/navImages/logo.svg" alt="" />

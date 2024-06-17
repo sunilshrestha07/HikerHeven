@@ -32,7 +32,7 @@ export default function Register() {
   return (
     <>
       <div className={paddingSize}>
-            <div className="grid  sm:grid-rows-none sm:grid-cols-5 bg-gray-200 rounded-2xl  overflow-hidden">
+            <div className="grid  sm:grid-rows-none sm:grid-cols-5 bg-gray-200 rounded-2xl  overflow-hidden mt-16">
                 <div className="  sm:col-span-3 px-5 lg:px-16 py-5 lg:py-10 order-2 sm:order-1 ">
                     <div className=" flex flex-col gap-5 xl:gap-6 ">
                         <div className="flex flex-col gap-2">

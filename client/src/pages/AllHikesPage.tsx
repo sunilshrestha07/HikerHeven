@@ -19,7 +19,7 @@ export default function AllHikesPage() {
   return (
     <>
       <div className="">
-        <div className={`${paddingSize} flex flex-col gap-10`}>
+        <div className={`${paddingSize} flex flex-col gap-10 mt-5`}>
           <div className=" flex flex-col gap-3">
             <p className="font-Lora text-xl sm:text-4xl font-semibold">Find your best hike</p>
           </div>

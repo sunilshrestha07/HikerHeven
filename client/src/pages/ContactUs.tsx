@@ -32,7 +32,7 @@ export default function ContactUs() {
 
   return (
     <div className={`${paddingSize}`}>
-      <div className="flex flex-col justify-center items-center bg-gray-200 rounded-lg gap-10 pt-20 pb-28 mt-10">
+      <div className="flex flex-col justify-center items-center bg-gray-200 rounded-lg gap-10 pt-20 pb-28 mt-20">
         <div className="font-Lora flex flex-col gap-3 justify-center items-center">
           <p className="text-2xl sm:text-4xl font-semibold">Contact Us</p>
           <p className="text-sm sm:text-xl font-semibold">Have questions or feedback? Reach out to us!</p>

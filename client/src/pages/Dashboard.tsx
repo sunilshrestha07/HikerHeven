@@ -24,7 +24,7 @@ export default function Dashboard() {
     
   return (
     <>
-        <div className={`${paddingSize} rounded-lg overflow-hidden h-full`}>
+        <div className={`${paddingSize} rounded-lg overflow-hidden h-full mt-16`}>
             <div className=" flex flex-col gap-3 h-full">
                 <div className=" flex items-center gap-4 sm:gap-8">
                     <p className=" font-Lora text-2xl sm:text-3xl font-semibold">Dashboard</p>

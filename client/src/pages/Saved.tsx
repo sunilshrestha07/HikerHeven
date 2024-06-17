@@ -21,7 +21,7 @@ export default function Saved() {
   return (
     <>
       <div>
-        <div className={`${paddingSize} flex flex-col gap-10`}>
+        <div className={`${paddingSize} flex flex-col gap-10 mt-20`}>
           {currentUser ? (
             <div>
               <div className="flex flex-col gap-3">
