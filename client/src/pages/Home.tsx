@@ -60,7 +60,7 @@ export default function Home() {
         ):(
           <div className=" flex justify-center items-center font-Lora font-semibold w-full aspect-[16/7]">
           <div className=" w-1/2 flex flex-col gap-3">
-            <div className=" mt-28">
+            <div className=" sm:mt-28">
               <Loader/>
             </div>
             <p className=" text-2xl text-center">Loading...</p>
