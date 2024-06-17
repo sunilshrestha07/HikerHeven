@@ -34,7 +34,6 @@ const Reviews: React.FC<reviewProp> = ({ postId }) => {
         console.log('Review post success');
         setIsUploading(false);
         console.log(reviewFormData);
-        window.location.reload();
       }
     } catch (error: any) {
       setIsUploading(false);
