@@ -1,7 +1,7 @@
 export interface registerFormDataInterface{
     name?: string,
     email?: string,
-    password?: string
+    number?: number
 }
 export interface messageInterface{
   email?: string,
@@ -73,4 +73,16 @@ export interface reviewdataInterface{
   userImage? : string 
   postId: string | null;
   createdAt?: string 
+}
+
+export interface searchProps {
+  searchItem: string | null;
+}
+
+
+export interface allUsersInterface{
+  _id: string | null; 
+  name: string | null;
+  email: string | null;
+  avatar: string;
 }

@@ -28,19 +28,20 @@ export default function Saved() {
                 <p className="font-Lora text-xl sm:text-4xl font-semibold">Saved Hikes</p>
                 <div className=" flex justify-between">
                 {noOfSavedHikes ? (
-                  <p className="font-Lora text-base sm:text-xl font-medium opacity-70 capitalize">Total hikes: {noOfSavedHikes}</p>
+                  <div className=" flex justify-between w-full">
+                    <p className="font-Lora text-base sm:text-xl font-medium opacity-70 capitalize">Total hikes: {noOfSavedHikes}</p>
+                    <button className=" font-Lora sm:text-xl text-red-400" onClick={handelClear}>Clear All</button>
+                  </div>
                 ) : (
                   <p></p>
                 )}
-
-                <button className=" font-Lora sm:text-xl text-red-400" onClick={handelClear}>Clear All</button>
                 </div>
               </div>
               <div>
                 {savedHikes.length > 0 ? (
                   <div></div>
                 ) : (
-                  <div className="font-Lora text-xl sm:text-4xl font-semibold w-full text-center">
+                  <div className="font-Lora text-xl sm:text-4xl font-semibold w-full text-center pt-16">
                     <p>You have no saved hikes!</p>
                   </div>
                 )}

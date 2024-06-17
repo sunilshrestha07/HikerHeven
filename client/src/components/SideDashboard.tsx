@@ -16,12 +16,21 @@ export default function SideDashboard() {
                         </div>
                     </Link>
                     {currentUser?.isAdmin && (
+                        <div className="">
                         <Link to="/dashboard?tab=addpost">
                             <div className="flex justify-center font-semibold items-center gap-4 font-Quicksand  text-xl w-full aspect-[16/8] p-3 border-b-2">
                                 <img className="h-4" src="./navImages/post.png" alt="Add Post" />
                                 <p>Add Post</p>
                             </div>
                         </Link>
+
+                        <Link to="/dashboard?tab=allinfo">
+                            <div className="flex justify-center font-semibold items-center gap-4 font-Quicksand  text-xl w-full aspect-[16/8] p-3 border-b-2">
+                                <img className="h-4" src="./navImages/post.png" alt="Add Post" />
+                                <p>Add Post</p>
+                            </div>
+                        </Link>
+                        </div>
                     )}
                 </div>
                 <div className=" flex flex-col items-center ">

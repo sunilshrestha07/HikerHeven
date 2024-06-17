@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Search from './Search';
 
 export default function Crousel() {
   //not shoiwng the indicator of the crousel if the screen is smaller than 640 px
@@ -15,11 +16,11 @@ export default function Crousel() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-  const [serachedHike, setSerachedHike] = useState<String>();
+    const [searchedHike, setSearchedHike] = useState<string | null>(null);
   const handelSearch = (e:React.ChangeEvent<HTMLInputElement>) =>{
-    setSerachedHike(e.target.value)
+    setSearchedHike(e.target.value)
   }
-  console.log(serachedHike)
+  console.log(searchedHike)
   // Array of images to map and show in the carousel
   const crouselImages = [
     { lowImg: "/crouselImage/lowOne.jpg" },
@@ -55,7 +56,7 @@ export default function Crousel() {
         <div className=" w-full flex justify-center items-center">
           <p className='text-3xl sm:text-5xl lg:text-7xl text-white font-Lora font-semibold text-stroke'>Find Your hikes</p>
         </div>
-        <div className=" w-10/12 sm:w-2/4 bg-white rounded-full overflow-hidden border-2 sm:border-none">
+        <div className=" w-10/12 sm:w-2/4 bg-white rounded-full overflow-hidden border-2 sm:border-none ">
             <form className=' w-11/12 flex items-center justify-between' action="">
               <input className=' py-3 px-5 sm:px-8 sm:py-5 w-full text-sm sm:text-2xl font-Quicksand  outline-none ' type="search" name="" id="" placeholder='Search by city or hike name' onChange={handelSearch} />
               <button>
@@ -63,6 +64,9 @@ export default function Crousel() {
               </button>
             </form>
         </div>
+            <div className=" absolute top-[100%] right-[50%] translate-x-[50%] mt-3 w-1/2  rounded-xl overflow-hidden">
+              <Search searchItem={searchedHike} />
+            </div>
       </div>
     </div>
   );

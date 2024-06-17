@@ -1,6 +1,9 @@
 import { paddingSize } from "../declareSize";
 import React, { useState } from "react";
 import { registerFormDataInterface } from "../declareInterface";
+import axios from "axios";
+import { baseUrl } from "../config";
+import { toast } from "react-toastify";
 
 export default function Register() {
   //stroring data in formData
@@ -10,9 +13,21 @@ export default function Register() {
   }
   
   //handling form submittion
-  const handelRegisterSubmit = (e:React.FormEvent<HTMLFormElement>) =>{
+  const handelRegisterSubmit = async (e:React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault()
-    console.log("Register success",formData)
+    try {
+      const res = await axios.post(`${baseUrl.baseUrl}/api/register/postregister`,formData)
+      if(res.status === 200){
+        toast.info('You will be contacted soon')
+        window.location.reload()
+      }
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+          toast.error(error.response?.data?.message || 'An error occurred during registeration');
+      } else {
+          toast.error('An unknown error occurred during registeration');
+      }
+  }
   }
   return (
     <>
@@ -29,20 +44,19 @@ export default function Register() {
                               <form className="flex flex-col gap-4 sm:w-4/5 xl:w-4/6" onSubmit={handelRegisterSubmit}>
                                 <input 
                                 className="font-Quicksand p-2 xl:p-3 rounded-md"
-                                type="text" name="" id="" 
+                                type="text" name="" id="name" 
                                 placeholder="Name"  
                                 onChange={handelRegister}
                                 />
 
                                 <input 
                                 className="font-Quicksand p-2 xl:p-3 rounded-md"
-                                type="number" name="" id="
-                                " placeholder="Number"  
+                                type="number" name="" id="number" placeholder="Number"  
                                 onChange={handelRegister}/>
 
                                 <input 
                                 className="font-Quicksand p-2 xl:p-3 rounded-md"
-                                type="email" name="" id=""
+                                type="email" name="" id="email"
                                  placeholder="Email" 
                                  onChange={handelRegister}/>
 

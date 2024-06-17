@@ -4,6 +4,7 @@ import SideDashboard from "../components/SideDashboard";
 import DashProfile from "../components/DashProfile";
 import { useLocation } from "react-router-dom";
 import DashPost from "../components/DashPost";
+import DashAllInfo from "../components/DashAllInfo";
 
 export default function Dashboard() {
     const [isDashMenuOpen,setIsDashMenuOpen]=useState<boolean>(false)
@@ -52,6 +53,7 @@ export default function Dashboard() {
                         <div className="col-span-8 sm:col-span-5 lg:col-span-6 pt-10 sm:pt-0  h-full overflow-y-scroll ">
                            {tab === 'profile' && <DashProfile/>}
                            {tab === 'addpost' && <DashPost/>}
+                           {tab === 'allinfo' && <DashAllInfo/>}
                         </div>
                     </div>
                 </div>
