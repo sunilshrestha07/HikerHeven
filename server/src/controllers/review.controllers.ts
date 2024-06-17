@@ -6,7 +6,7 @@ export const postReview = async (req:Request ,res:Response ,next:NextFunction) =
     try {
         const {rating, comment, postId,userImage,userName}=req.body
 
-        if(!comment || !postId ||!userImage || !rating ||!userName){
+        if(!postId ||!userImage || !rating ||!userName){
             return next (errorHandler(400,"All fields are required"))
         }
 
