@@ -63,7 +63,7 @@ export default function Home() {
             <div className=" sm:mt-28">
               <Loader/>
             </div>
-            <p className=" text-2xl text-center">Loading...</p>
+            <p className=" text-2xl text-center">Loading....</p>
             <p className=" text-sm opacity-80 text-center">Our website is starting up. Please bear with us as we prepare everything for you. Please note that we are using a free hosting service, which may cause a slight delay in loading.
             Please reload onlce after a minute
             </p>
