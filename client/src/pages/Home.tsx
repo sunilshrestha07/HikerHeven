@@ -40,8 +40,8 @@ export default function Home() {
     <div>
       <div className="">
         {isLoaded ? (
-          <div className="flex flex-col gap-10">
-            <div className={paddingSize}>
+          <div className="flex flex-col gap-10 mt-20">
+            <div className={`${paddingSize} z-10`}>
               <Crousel/>
             </div>
             <div className={paddingSize}>

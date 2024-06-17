@@ -42,7 +42,7 @@ export default function Favorites() {
 
     return (
         <>
-            <div className="">
+            <div className=" z-20">
                 <div className="flex flex-col gap-4">
                     <div className="font-Lora text-xl sm:text-3xl font-semibold">
                         <p>Local Favorites</p>
@@ -69,7 +69,7 @@ export default function Favorites() {
                                             </div>
                                         </div>
                                     </Link>
-                                    <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1" onClick={currentUser ? () => handleSaveHike(hike) : () => toast.info("login first")}>
+                                    <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1 hover:bg-lightGreen" onClick={currentUser ? () => handleSaveHike(hike) : () => toast.info("login first")}>
                                         <img className="h-3 sm:h-5" src="/navImages/save.png" alt="" />
                                     </div>
                                 </div>

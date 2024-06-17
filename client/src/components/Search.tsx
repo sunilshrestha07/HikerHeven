@@ -19,12 +19,12 @@ const Search: React.FC<searchProps> = ({ searchItem }) => {
 
   return (
     <div className="w-full ">
-      <div className=" bg-red-500">
+      <div className="">
         {searchItem ? (
-            <div className="text-sm sm:text-xl font-Quicksand font-medium bg-white w-full flex  flex-col">
+            <div className="text-sm sm:text-xl font-Quicksand font-medium bg-white w-full flex  flex-col z-50">
                 {filteredHikes.length > 0 ? (
                 filteredHikes.map((hike) => (
-                    <div key={hike._id} className=" px-10 pt-5 pb-2 hover:bg-gray-100 cursor-pointer">
+                    <div key={hike._id} className=" px-10 pt-5 pb-2 hover:bg-gray-100 cursor-pointer z-50">
                         <Link to={`aboutHike/${hike._id}`}>
                             <div className="">
                                 <p className=" font-semibold">{hike.name}</p>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Oauth from "../components/Oauth";
 import { SingupFormDataInterface } from "../declareInterface";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,9 +13,7 @@ export default function Signup() {
         email: '',
         password: ''
     });
-    const [error, setError] = useState<string | null>(null);
-    const [isErrorDisplayActive, setIsErrorDisplayActive] = useState(false);
-    const timeout = 3000; // Timeout duration in milliseconds
+    const [isLoading,setIsLoading]=useState<boolean>(false)
 
     const handleSignup = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLoginFormData({ ...loginFormData, [e.target.id]: e.target.value });
@@ -23,12 +21,13 @@ export default function Signup() {
 
     const handleSignupSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setError(null); // Reset error state before submitting
+        setIsLoading(true)
         try {
             const res = await axios.post(`${baseUrl.baseUrl}/api/user/signup`, loginFormData);
             if (res.status === 200) {
                 toast.success('Sign up success');
                 navigate('/login');
+                setIsLoading(false)
             }
         } catch (error: any) {
             if (axios.isAxiosError(error)) {
@@ -36,18 +35,9 @@ export default function Signup() {
             } else {
                 toast.error('An unknown error occurred during sign up');
             }
+            setIsLoading(false)
         }
     };
-
-    useEffect(() => {
-        if (isErrorDisplayActive) {
-            const timer = setTimeout(() => {
-                setIsErrorDisplayActive(false);
-            }, timeout);
-
-            return () => clearTimeout(timer);
-        }
-    }, [isErrorDisplayActive, timeout]);
 
     return (
         <div className="w-full flex justify-center items-center">
@@ -90,11 +80,8 @@ export default function Signup() {
                                 onChange={handleSignup}
                             />
                         </div>
-                        <button type="submit" className="font-Lora bg-darkGreen text-white p-3 rounded-full font-medium w-8/12 sm:w-1/2 mt-4">Sign Up</button>
+                        <button type="submit" className={`font-Lora bg-darkGreen hover:bg-lightGreen text-white hover:text-black p-3 rounded-full font-medium w-8/12 sm:w-1/2 mt-4 ${isLoading? "opacity-50":''}`} disabled={isLoading}>Sign Up</button>
                     </form>
-                    <div className=" flex items-center justify-center absolute -top-2 left-1/2 transform -translate-x-1/2 font-Quicksand text-xl w-full">
-                        {isErrorDisplayActive && <div className="text-red-500 mt-4 w-fulltext-center">{error}</div>}
-                    </div>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-5">
                     <div className="font-Lora opacity-60">

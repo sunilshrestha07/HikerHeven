@@ -10,13 +10,13 @@ export default function Navbar() {
     const noOfSavedHikes = savedHikes.length
 
     return (
-        <nav>
-            <div className=" py-5">
+        <nav className=" relative w-full">
+            <div className=" py-2 fixed top-0 left-0 z-50 bg-white w-full">
                 <div className={`${paddingSize} flex justify-between sm:grid sm:grid-cols-7 items-center`}>
                     {/* Logo section */}
                     <div className="col-span-2 lg:col-span-3 flex items-center">
                         <Link to="/">
-                            <p className="text-xl font-Lora uppercase font-bold text-darkGreen ">HikerHeven</p>
+                            <p className="text-xl font-Lora uppercase font-bold text-darkGreen ">Hiker_Heaven</p>
                         </Link>
                     </div>
 

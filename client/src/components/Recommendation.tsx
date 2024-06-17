@@ -70,7 +70,7 @@ export default function Recommendation() {
                                                 </div>
                                             </Link>
                                             {/* For adding to saved */}
-                                            <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1" onClick={currentUser ? ()=>handleSaveHike(hike):()=>toast.info('Login first')}>
+                                            <div className="flex justify-center items-center bg-white rounded-full absolute top-2 right-2 p-1 hover:bg-lightGreen" onClick={currentUser ? ()=>handleSaveHike(hike):()=>toast.info('Login first')}>
                                                 <img className="h-3 sm:h-5" src="/navImages/save.png" alt="" />
                                             </div>
                                         </div>

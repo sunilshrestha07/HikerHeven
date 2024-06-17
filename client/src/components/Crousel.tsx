@@ -64,7 +64,7 @@ export default function Crousel() {
               </button>
             </form>
         </div>
-            <div className=" absolute top-[100%] right-[50%] translate-x-[50%] mt-3 w-1/2  rounded-xl overflow-hidden">
+            <div className=" absolute top-[100%] right-[50%] translate-x-[50%] mt-3 w-full  sm:w-1/2  rounded-xl overflow-hidden px-8">
               <Search searchItem={searchedHike} />
             </div>
       </div>

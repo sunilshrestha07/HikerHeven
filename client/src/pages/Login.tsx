@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Oauth from "../components/Oauth"
 import { loginFormDataInterface } from "../declareInterface";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,9 +9,9 @@ import { useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
 
 export default function Login() {
-    const [isErrorDisplayActive,setIsErrorDisplayActive]=useState<boolean>(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [isLoading,setIsLoading]=useState<boolean>(false)
     const [loginFormData, setLoginFormData] = useState<loginFormDataInterface>({
         email:'',
         password:''
@@ -23,12 +23,14 @@ export default function Login() {
     //handeling login submittion
     const handelLoginSubmit =async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsLoading(true)
         try {
             const res = await axios.post(`${baseUrl.baseUrl}/api/user/login`,loginFormData)
             if(res.status === 200){
                 dispatch(loginSuccess(res.data))
                 toast.success('login success')
                 navigate('/')
+                setIsLoading(false)
             }
         } catch (error: any) {
             console.error('login failed', error);
@@ -37,21 +39,10 @@ export default function Login() {
             } else {
                 toast.error('An unknown error occurred during login up');
             }
-            setIsErrorDisplayActive(true);
+            setIsLoading(false)
         }
     }
 
-    //handeling errordisplay
-    const timeout = 3000
-    useEffect(() => {
-        if (isErrorDisplayActive) {
-            const timer = setTimeout(() => {
-                setIsErrorDisplayActive(false);
-            }, timeout);
-
-            return () => clearTimeout(timer);
-        }
-    }, [isErrorDisplayActive, timeout]);
   return (
     <>
         <div className="  w-full flex justify-center items-center">
@@ -76,7 +67,7 @@ export default function Login() {
                             type="password" name="" id="password" placeholder="Password" required
                             onChange={handelLogin}/>
                         </div>
-                        <button type="submit" className="font-Lora bg-darkGreen text-white p-3 rounded-full font-medium w-8/12 sm:w-1/2 mt-4">Login</button>
+                        <button type="submit" className={`font-Lora bg-darkGreen hover:bg-lightGreen text-white hover:text-black p-3 rounded-full font-medium w-8/12 sm:w-1/2 mt-4 ${isLoading ? "opacity-50":''}`} disabled={isLoading}>Login</button>
                     </form>
                 </div>
                 <div className=" flex flex-col justify-center items-center gap-5">

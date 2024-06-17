@@ -38,7 +38,7 @@ export default function AboutHike() {
   return (
     <>
       <div className="">
-        <div className={`${paddingSize} mt-2 sm:mt-6`}>
+        <div className={`${paddingSize} mt-16 sm:mt-24`}>
           <div className="rounded-lg overflow-hidden">
             <div className="relative w-full h-full">
               <div className="">
