@@ -3,5 +3,5 @@ interface BaseUrl {
 }
 
 export const baseUrl: BaseUrl = {
-    baseUrl: 'http://localhost:5000'
+    baseUrl: 'https://hikerheven.onrender.com'
 };

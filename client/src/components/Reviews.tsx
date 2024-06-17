@@ -176,10 +176,10 @@ const Reviews: React.FC<reviewProp> = ({ postId }) => {
                     {generateStars(review.rating)}
                   </div>
                   <div className="">
-                    <p className=" font-Quicksand text-sm lg:text-base">{review.comment}</p>
+                    <p className=" font-Quicksand text-base">{review.comment}</p>
                     {currentUser?.name === review.userName && (
                       <form action="" onSubmit={()=>handelDeleteReview(review._id)}>
-                        <button type="submit" className=" font-Quicksand font-medium text-red-500">Delete</button>
+                        <button type="submit" className=" font-Quicksand font-medium text-red-500 text-sm sm:text-base">Delete</button>
                       </form>
                     )}
                   </div>

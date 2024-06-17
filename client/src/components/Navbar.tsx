@@ -50,12 +50,12 @@ export default function Navbar() {
                             {currentUser ? (
                             <div className="">
                                 <Link to='/dashboard?tab=profile'>
-                                    <img className="h-10 w-10 rounded-full" src={currentUser.avatar} alt="avatar" />
+                                    <img className="h-10 w-10 rounded-full object-cover" src={currentUser.avatar} alt="avatar" />
                                 </Link>
                             </div>
                             ):(
                                 <Link to='/signup'>
-                                    <img className="h-6 sm:h-5 lg:h-6 -mt-1" src="./navImages/profile.png" alt="" />
+                                    <img className="h-5 sm:h-5 lg:h-6 -mt-1" src="./navImages/profile.png" alt="" />
                                 </Link>
                             )}
 
