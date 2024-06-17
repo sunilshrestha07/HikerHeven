@@ -12,39 +12,44 @@ const Reviews: React.FC<reviewProp> = ({ postId }) => {
   const [reviews, setReviews] = useState<reviewdataInterface[]>([]);
   const [starRating, setStarRating] = useState<number>(0);
   const [hoverStarRating, setHoverStarRating] = useState<number>(0);
-  const [reviewFormData, setReviewFormData] = useState<reviewInterface>({});
+  const [reviewFormData, setReviewFormData] = useState<reviewInterface>({
+    rating: 0,
+    userName: "",
+    postId: "",
+    userImage: "",
+    comment: "",
+  });
   const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const handleReviewChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setReviewFormData({ ...reviewFormData,
-      [e.target.id]:e.target.value,
-      rating:starRating,
-      userName:currentUser?.name,
-      postId:postId! ,
-      userImage:currentUser?.avatar
-      });
+    setReviewFormData({ ...reviewFormData, [e.target.id]: e.target.value });
   };
 
   const handleReviewSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsUploading(true);
-    setReviewFormData({...reviewFormData,rating:starRating})
-    const updatedReview = reviewFormData
-    console.log(updatedReview)
+
+    const updatedReview = {
+      ...reviewFormData,
+      rating: starRating,
+      userName: currentUser?.name,
+      postId: postId,
+      userImage: currentUser?.avatar,
+    };
+
     try {
       const res = await axios.post(`${baseUrl.baseUrl}/api/review/postreview`, updatedReview);
       if (res.status === 200) {
-        console.log('Review post success');
+        toast.success("Review posted successfully!");
         setIsUploading(false);
-        window.location.reload()
-        console.log(reviewFormData);
+        window.location.reload();
       }
     } catch (error: any) {
       setIsUploading(false);
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data?.message || 'An error occurred during review submission');
+        toast.error(error.response?.data?.message || "An error occurred during review submission");
       } else {
-        toast.error('An unknown error occurred during review submission');
+        toast.error("An unknown error occurred during review submission");
       }
     }
   };
@@ -71,35 +76,34 @@ const Reviews: React.FC<reviewProp> = ({ postId }) => {
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-        console.log(error.response?.data?.message || 'An error occurred during fetching');
+        toast.error(error.response?.data?.message || "An error occurred during fetching reviews");
       } else {
-        console.log('An unknown error occurred during fetching');
+        toast.error("An unknown error occurred during fetching reviews");
       }
     }
   };
 
   useEffect(() => {
     handleReviewFetch();
-    // window.location.reload()
-  },[{postId}]);
+  }, [postId]);
 
-  //handelDelete review
-  const handelDeleteReview =async (commentId : string)=>{
+  const handleDeleteReview = async (commentId: string) => {
     try {
-      const res = await axios.delete(`${baseUrl.baseUrl}/api/review/deletespecific/${commentId}`)
-      if(res.status === 200){
-        console.log('Reivew deleted success')
+      const res = await axios.delete(`${baseUrl.baseUrl}/api/review/deletespecific/${commentId}`);
+      if (res.status === 200) {
+        toast.success("Review deleted successfully");
+        handleReviewFetch();
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-          toast.error(error.response?.data?.message || 'An error occurred during deletin');
+        toast.error(error.response?.data?.message || "An error occurred during deletion");
       } else {
-          toast.error('An unknown error occurred during deletion');
+        toast.error("An unknown error occurred during deletion");
       }
-  }
-  }
+    }
+  };
 
-  const filteredReviews = reviews.filter(review => review.postId === postId);
+  const filteredReviews = reviews.filter((review) => review.postId === postId);
 
   return (
     <div>
@@ -153,7 +157,7 @@ const Reviews: React.FC<reviewProp> = ({ postId }) => {
               <div className="">
                 <button
                   type="submit"
-                  className={`bg-darkGreen text-white font-Lora text-base sm:text-xl px-5 py-2 rounded-full ${isUploading ? 'opacity-50' : ''}`}
+                  className={`bg-darkGreen text-white font-Lora text-base sm:text-xl px-5 py-2 rounded-full ${isUploading ? "opacity-50" : ""}`}
                   disabled={isUploading}
                 >
                   Submit Review
@@ -165,34 +169,35 @@ const Reviews: React.FC<reviewProp> = ({ postId }) => {
 
         <div className="">
           {filteredReviews.length > 0 ? (
-            <div className=" flex flex-col gap-8 mt-10 ">
+            <div className="flex flex-col gap-8 mt-10">
               {filteredReviews.map((review, index) => (
-                <div className=" flex flex-col gap-3 border-t-2 py-4" key={index}>
-                  <div className=" flex flex-row justify-start items-center gap-2">
+                <div className="flex flex-col gap-3 border-t-2 py-4" key={index}>
+                  <div className="flex flex-row justify-start items-center gap-2">
                     <img className="h-12 lg:h-14 aspect-square rounded-full object-cover" src={review.userImage} alt="" />
-                    <div className=" font-Lora">
+                    <div className="font-Lora">
                       <p className="font-medium text-base lg:text-xl">{review.userName}</p>
-                      <p className="opacity-80 text-xs font">{moment(review.createdAt).format('MMM Do YY')}</p>
+                      <p className="opacity-80 text-xs">{moment(review.createdAt).format("MMM Do YY")}</p>
                     </div>
                   </div>
-                  <div className="flex gap-1 ">
+                  <div className="flex gap-1">
                     {generateStars(review.rating)}
                   </div>
                   <div className="">
-                    <p className=" font-Quicksand text-base">{review.comment}</p>
+                    <p className="font-Quicksand text-base">{review.comment}</p>
                     {currentUser?.name === review.userName && (
-                      <form action="" onSubmit={()=>handelDeleteReview(review._id)}>
-                        <button type="submit" className=" font-Quicksand font-medium text-red-500 text-sm sm:text-base">Delete</button>
-                      </form>
+                      <button
+                        onClick={() => handleDeleteReview(review._id)}
+                        className="font-Quicksand font-medium text-red-500 text-sm sm:text-base"
+                      >
+                        Delete
+                      </button>
                     )}
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="">
-              No reviews!
-            </div>
+            <div>No reviews!</div>
           )}
         </div>
       </div>
