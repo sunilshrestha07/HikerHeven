@@ -80,7 +80,7 @@ export const deletePost = async (req: Request, res: Response, next: NextFunction
             return next(errorHandler(404, "Post not found"));
         }
 
-        res.status(200).json({ message: "Post deleted successfully", post: deletedPost });
+        res.status(200).json({ message: "Post deleted successfully"});
     } catch (error) {
         return next(errorHandler(500, (error as Error).message));
     }
