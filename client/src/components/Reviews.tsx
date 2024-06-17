@@ -28,8 +28,9 @@ const Reviews: React.FC<reviewProp> = ({ postId }) => {
   const handleReviewSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsUploading(true);
+    const updatedReview = reviewFormData
     try {
-      const res = await axios.post(`${baseUrl.baseUrl}/api/review/postreview`, reviewFormData);
+      const res = await axios.post(`${baseUrl.baseUrl}/api/review/postreview`, updatedReview);
       if (res.status === 200) {
         console.log('Review post success');
         setIsUploading(false);
@@ -165,7 +166,7 @@ const Reviews: React.FC<reviewProp> = ({ postId }) => {
               {filteredReviews.map((review, index) => (
                 <div className=" flex flex-col gap-3 border-t-2 py-4" key={index}>
                   <div className=" flex flex-row justify-start items-center gap-2">
-                    <img className="h-12 lg:h-14 aspect-square rounded-full" src={review.userImage} alt="" />
+                    <img className="h-12 lg:h-14 aspect-square rounded-full object-cover" src={review.userImage} alt="" />
                     <div className=" font-Lora">
                       <p className="font-medium text-base lg:text-xl">{review.userName}</p>
                       <p className="opacity-80 text-xs font">{moment(review.createdAt).format('MMM Do YY')}</p>
